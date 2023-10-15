@@ -1,0 +1,11 @@
+.searchbar{
+    width: 40%;
+    border: 2px rgb(206, 52, 52);
+    border-radius: 4px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    margin: 8px;
+    
+}
+
+

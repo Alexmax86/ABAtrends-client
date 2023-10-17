@@ -1,4 +1,5 @@
 import LineChart from './components/linechart';
+import Filterselector from './components/filterselector';
 
 import { useState } from 'react';
 
@@ -31,12 +32,14 @@ const data2 = {
 
 export default function Dashboard(){
   const [graphData, setGraphData] = useState(data)
-  console.log("Initial: ")
-  console.log(graphData)
+  
 
-  const handleClick = () => graphData === data ? setGraphData(data2) : setGraphData(data)
+  
   
   return (    
+    <div>
+      <Filterselector/>
       <LineChart graphData={graphData}/>
+    </div>
   )
 }

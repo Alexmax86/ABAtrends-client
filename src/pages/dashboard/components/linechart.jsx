@@ -24,8 +24,7 @@ import {
   
   export default function LineChart({graphData}) {
     
-    console.log("Calling")
-    console.log(graphData)
+    
     const options = {
       scales:{
         x: {

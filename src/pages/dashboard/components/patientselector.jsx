@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './patientselector.css'
+import Accordion from "../../../components/accordion"
 
 export default function PatientSelector({list}){
     console.log(list)
@@ -17,7 +18,8 @@ export default function PatientSelector({list}){
     
     return(
         <div className="patient-selector">
-            {checkboxCollection}
+            <Accordion head="Patients" body=  {checkboxCollection}></Accordion>
+            
         </div>
     )
 }
@@ -32,8 +34,8 @@ function Checkbox({id, handleStateChange, data}){
 
 
     return(
-        <>  
-                
+        <> 
+            
                 <label htmlFor={id}>{data.name} {data.surname} {id}</label>
                 <input type="checkbox" name={id} onChange={handleChange}/>
                     

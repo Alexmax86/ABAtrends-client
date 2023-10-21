@@ -1,12 +1,22 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { filtersContext } from "../dashcontexts"
 import './patientselector.css'
-import Accordion from "../../../components/accordion"
+import Accordion from "../../../components/selectorwidget"
 
-export default function PatientSelector({list}){
-    console.log(list)
+export default function PatientSelector(){
+    const thisfiltersContext = useContext(filtersContext)
+    console.log("Dashcontext:")
+    console.log(thisfiltersContext)
     const [selection, setSelection] = useState([])
+    return (
+        <>
+            <p>JSON:</p>
+            <p>{JSON.stringify(thisfiltersContext)}</p>
+        </>
+    )
+            
     
-
+/*
     const handleStateChange = (element) => {
         console.log("element name:" + element)
         if (selection.includes(element)){selection.splice(selection.indexOf(element), 1)}
@@ -14,11 +24,11 @@ export default function PatientSelector({list}){
         console.log(selection)
     }
     
-    const checkboxCollection = list.map((item) => <Checkbox id={item.id} handleStateChange={handleStateChange} data={item}/>)
+    
     
     return(
         <div className="patient-selector">
-            <Accordion head="Patients" body=  {checkboxCollection}></Accordion>
+            <Accordion head="Patients" body= {null}></Accordion>
             
         </div>
     )
@@ -42,4 +52,5 @@ function Checkbox({id, handleStateChange, data}){
             
         </>
     )
+    */
 }

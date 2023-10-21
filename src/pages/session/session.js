@@ -1,16 +1,25 @@
-import Accordion from "../../components/accordion"
+
+import { useState, createContext, useContext } from "react"
+import Selectorwidget from "../../components/selectorwidget"
+
+
+
 
 export default function Session(){
-    const bloc =  (
-        <>
-        <p>baubaubua</p>
-        <p>baubaubua</p>
-        <p>baubaubua</p>
-        <p>baubaubua</p>
-        <p>baubaubua</p>
-        </>)
-    
+    const [parentSelection, setParentSelection] = useState([])
+    const list = [
+        {id: 1, displayString: "John Doe"},
+        {id: 2, displayString: "Jane Doe"},
+        {id: 3, displayString: "Michael Smith"},
+    ]
+
+    const callback = (choiceArray) => console.log("Callback: " + choiceArray)
+
     return(
-        <Accordion head="head" body={bloc}/>
+        <>
+            <Selectorwidget list = {list} setParentSelection = {setParentSelection} />
+            <button onClick={callback}>Click me</button>
+            <p>{JSON.stringify(parentSelection)}</p>
+        </>
     )
 }

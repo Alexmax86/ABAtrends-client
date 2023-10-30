@@ -7,7 +7,7 @@ import './selectorwidget.css'
 //**********Takes { [{id, displayString}], callback(choiceArray) }
 //**********Callback 
 
-export default function Selectorwidget({list, setParentSelection}){
+export default function Selectorwidget({list, callBack}){
     
     let [isOpen, setOpen] = useState(false)
     let [selection, setSelection] = useState([])
@@ -40,7 +40,7 @@ export default function Selectorwidget({list, setParentSelection}){
         ? newSelection.splice(newSelection.indexOf(id), 1)
         : newSelection.push(id)
         setSelection(newSelection)
-        setParentSelection(newSelection)
+        callBack(newSelection)
     }
 
 
@@ -59,11 +59,11 @@ export default function Selectorwidget({list, setParentSelection}){
                     : `${selection.length} elements selected`                
                 }
             </div>            
-            {isOpen &&
-                <div  className="accordion-body">                    
-                    {checkboxCollection}                    
-                </div>    
-            }      
+            
+            <div  className = {isOpen ? "accordion-body" : "accordion-body-hidden"}>                    
+                {checkboxCollection}                    
+            </div>    
+           
         </div>
     )
 }
@@ -83,8 +83,7 @@ function Checkbox({id, handleChecking, displayString}){
             <div className="checkbox-list-item">
                 <label htmlFor={id}>{displayString}</label>
                 <input className="itemBox" type="checkbox" name={id} onChange={handleChange}/>
-            </div>   
-            
+            </div>
         </>
     )
 }

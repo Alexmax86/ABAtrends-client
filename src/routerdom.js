@@ -17,6 +17,7 @@ import Patients from "./pages/patients/patients";
 import Dashboard from "./pages/dashboard/dashboard"
 import Operators from "./pages/operators/operators"
 import Session from "./pages/session/session"
+import Testpage from "./pages/dashboard/testpage";
 
 
 export default function Routerdom() {
@@ -44,6 +45,11 @@ export default function Routerdom() {
         {
           path:"/session",
           element:<Session />
+        },
+        {
+          path: "/test",
+          element:<Testpage/>
+      
         }            
       ]
     }/*,

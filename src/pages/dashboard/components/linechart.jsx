@@ -6,11 +6,13 @@ import {
     LinearScale,
     PointElement,
     Tooltip,
-    Legend
+    Legend,
+    Colors
   } from 'chart.js'
   
   import 'chartjs-adapter-date-fns'
   import { Line } from 'react-chartjs-2'
+  
   
   ChartJS.register(
     LineElement,
@@ -18,7 +20,8 @@ import {
     LinearScale,
     PointElement,
     Tooltip,
-    Legend
+    Legend,
+    Colors
   )
   
   
@@ -33,6 +36,11 @@ import {
           ticks: {color: 'white'}
         },
         y: {beginAtZero: true}
+      },
+      plugins: {
+        colors: {
+          forceOverride: true
+        }
       }    
     }
     return <Line data={graphData} options={options}/>;

@@ -69,9 +69,7 @@ export default function Dashboard(){
       patientList.forEach((element) =>{
         const line = {
           label: element,
-          data: [],
-          backgroundColor: 'blue',
-          borderColor: 'black',
+          data: [],          
           tension: 0.2
         }
         apiData.forEach((apiElement) =>{

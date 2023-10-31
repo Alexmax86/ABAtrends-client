@@ -20,7 +20,7 @@ export default function Filterselector({filterPopulationData, setFilterSelection
     const patientSelectionCallBack = (arg) => (setPatientSelection(arg))
 
     useEffect(() => {
-        if (patientSelection.length > 0 && initialDate != null && finalDate != null){
+        if (initialDate != null && finalDate != null){
             console.log("useeffect")
             setFilterSelectionData({id: patientSelection, startDate: initialDate, endDate: finalDate})
         }

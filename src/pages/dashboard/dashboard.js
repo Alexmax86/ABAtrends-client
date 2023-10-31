@@ -53,34 +53,41 @@ export default function Dashboard(){
   
   //manipulate apiData to feed into graphData state
   useEffect(()=>{
+      console.log("graphData function")
       const patientList = []
 
       const tempGraphData = {datasets:[]}      
       
-        if (apiData.length > 0) {        
+              
         //Count how many patients in the data and store in patientList
         for (const element of apiData){
           !patientList.includes(element.patient_id)
           && patientList.push(element.patient_id)
         }   
         
-      }
-
-      patientList.forEach((element) =>{
-        const line = {
-          label: element,
-          data: [],          
-          tension: 0.2
+      
+        if (patientList.length === 0){console.log(patientList); setGraphData({datasets:[]})}
+        else {
+          
+          patientList.forEach((element) =>{
+            const line = {
+              label: element,
+              data: [],          
+              tension: 0.2
+            }
+            apiData.forEach((apiElement) =>{
+              if (apiElement.patient_id === element){
+                const dataPiece = {x: apiElement.date, y: apiElement.responses}
+                line.data.push(dataPiece)            
+              }
+            })
+            
+            tempGraphData.datasets.push(line)        
+            console.log("Tempgraphdata:" + JSON.stringify(tempGraphData))
+            setGraphData(tempGraphData)
+          })
         }
-        apiData.forEach((apiElement) =>{
-          if (apiElement.patient_id === element){
-            const dataPiece = {x: apiElement.date, y: apiElement.responses}
-            line.data.push(dataPiece)            
-          }
-        })
-        tempGraphData.datasets.push(line)        
-        setGraphData(tempGraphData)
-      })
+      
   }, [apiData]
   )
 
@@ -93,7 +100,9 @@ export default function Dashboard(){
     <div>      
       <button onClick={testFunction}>Chaynge filter data</button>
       <Filterselector filterPopulationData={filterPopulationData} setFilterSelectionData={setFilterSelectionData}/>
-      {graphData.datasets.length > 0 && <LineChart graphData={graphData}></LineChart>}
+      <LineChart graphData={graphData}></LineChart>
+      
+      
     </div>
   )
 }

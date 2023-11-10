@@ -1,4 +1,8 @@
+import { callback } from "chart.js/dist/helpers/helpers.core";
 import React from "react"
+import './usertable.css'
+
+
 export interface TableCell {
     caption: string;
     isButton?: boolean
@@ -17,7 +21,7 @@ export interface UserTableProps {
 
 export default function UserTable(tableProps: UserTableProps){
     return(
-        <table>
+        <table className="customTable">
         <thead>
             <tr>
                 {tableProps.headers.map((header, index) => (
@@ -25,14 +29,23 @@ export default function UserTable(tableProps: UserTableProps){
                 ))}
             </tr>
         </thead>
-        {tableProps.rows.map((rowItem) => (
-            <tr>
-               {rowItem.tableCells.map((cellItem) => (
-                <td>{cellItem.caption}</td>
+        <tbody>
+        {tableProps.rows.map((rowItem: TableRow) => (
+            <tr key={rowItem.key}>
+               {rowItem.tableCells.map((cellItem, index) => (
+                <td data-label={tableProps.headers[index]} key={index}>
+                    {
+                        !('callBack' in cellItem)
+                        ? cellItem.caption                                               
+                        : (<button onClick={cellItem.callBack}>{cellItem.caption}</button>)
+                    }
+                    
+                </td>
                ))} 
             </tr>
-        ))}      
         
+        ))}      
+        </tbody>
         </table> 
     )
 }

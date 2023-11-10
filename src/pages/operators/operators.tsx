@@ -1,8 +1,10 @@
 import React from "react";
-import { useEffect, useState } from 'react';
-import UserTable, { TableCell, TableRow, UserTableProps } from "../components/usertable/usertable";
+import {useState, useEffect} from "react"
+import UserTable, { TableCell, TableRow, UserTableProps }  from "../../components/usertable/usertable";
 
-export default function Testpage(){  
+
+
+export default function Operators(){  
     type ParsedRow = {
         id: number,
         name: string,

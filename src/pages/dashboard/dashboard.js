@@ -93,12 +93,11 @@ export default function Dashboard(){
 
 
 
-  const testFunction = () => {setFilterSelectionData({id: [1, 2], startDate: '2020-01-01', endDate: '2024-01-01'})}
+  
   
   
   return (    
-    <div>      
-      <button onClick={testFunction}>Chaynge filter data</button>
+    <div>            
       <Filterselector filterPopulationData={filterPopulationData} setFilterSelectionData={setFilterSelectionData}/>
       <LineChart graphData={graphData}></LineChart>
       

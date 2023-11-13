@@ -85,5 +85,6 @@ function Checkbox({id, handleChecking, displayString}){
                 <input className="itemBox" type="checkbox" name={id} onChange={handleChange}/>
             </div>
         </>
-    )
+    ) 
 }
+

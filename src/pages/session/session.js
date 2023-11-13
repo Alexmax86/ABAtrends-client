@@ -1,6 +1,6 @@
 
 import { useState, createContext, useContext } from "react"
-import Selectorwidget from "../../components/selectorwidget"
+//import Selectorwidget from "../../components/selectorwidget"
 
 
 
@@ -17,7 +17,7 @@ export default function Session(){
 
     return(
         <>
-            <Selectorwidget list = {list} setParentSelection = {setParentSelection} />
+            {/*<Selectorwidget list = {list} setParentSelection = {setParentSelection} />*/}
             <button onClick={callback}>Click me</button>
             <p>{JSON.stringify(parentSelection)}</p>
         </>

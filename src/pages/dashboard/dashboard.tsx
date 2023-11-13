@@ -1,46 +1,35 @@
-import LineChart from './components/linechart';
+//import LineChart from './components/linechart';
 import Filterselector from './components/filterselector';
-import { filtersContext } from './dashcontexts';
-import { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
-
-
+import {useState, useEffect } from 'react';
+import * as Types from './dashInterfaces'
+import * as Lib from './library'
 
 export default function Dashboard(){
-  //Patients list is loaded in filterPopulationData
-  //User selection is stored in filterSelectionData
-  //When filterSelectionData changes API is called and store result in apiData
-  const [filterPopulationData, setFilterPopulationData] = useState([])
-  const [filterSelectionData, setFilterSelectionData] = useState(null)
+  //Contains general data on patients and therapist to fill selection menus  
+  const [filtersContent, setFiltersContent] = useState<Types.FiltersContentType>()  
+  const [filterSelectionData, setFilterSelectionData] = useState<Types.FilterSelectionDataType>()
   const [apiData, setApiData] = useState([])  
   const [graphData, setGraphData] = useState({datasets:[]})
-  
 
-  //fetch lists of patients
-  useEffect(() => {
-    async function getPopulationData(){
-      try{
-        const resp = await fetch(process.env.REACT_APP_API_URL + '/patients');
-        const json = await resp.json();              
-        setFilterPopulationData(json);        
-      }
-      catch(err){
-        console.log(err)        
-      }
-    }
-    getPopulationData()   
-       
-  }, [])
-  ;
-
+  //Fetch list of patients and therapist, set its state
+  useEffect(() => {    
+    (async () => 
+      setFiltersContent(await Lib.getFiltersContent())
+    )()
+  }, []);
+  /*
   //fetch data according to filter selection and store in apiData
-  useEffect(()=>{
+  useEffect(() => {
     async function getData(){
-      try{
-        const resp = await fetch(process.env.REACT_APP_API_URL + `/getsessions?id=${filterSelectionData.id}&startdate=${filterSelectionData.startDate}&enddate=${filterSelectionData.endDate}`);
+      try{        
+        const resp = await fetch(
+          process.env.REACT_APP_API_URL + `/getsessions
+          ?patientsids=${filterSelectionData?.patientsIds}
+          &therapistsids=${filterSelectionData?.therapistsIds}
+          &startdate=${filterSelectionData?.startDate}
+          &enddate=${filterSelectionData?.endDate}`);
         const json = await resp.json();                    
-        setApiData(json);       
-        
+        setApiData(json);
       }
       catch(err){
         console.log(err)        
@@ -91,16 +80,16 @@ export default function Dashboard(){
   }, [apiData]
   )
 
+*/
 
-
-  
   
   
   return (    
     <div>            
-      <Filterselector filterPopulationData={filterPopulationData} setFilterSelectionData={setFilterSelectionData}/>
-      <LineChart graphData={graphData}></LineChart>
-      
+      {
+      <Filterselector filtersContent= {filtersContent} setFiltersContent= {setFiltersContent} />
+      //<LineChart graphData={graphData}></LineChart>
+    }
       
     </div>
   )

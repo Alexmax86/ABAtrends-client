@@ -3,19 +3,28 @@ import React, { useRef } from 'react';
 
 import './selectorwidget.css'
 
-//**********SELECTOR WIDGET
-//**********Takes { [{id, displayString}], callback(choiceArray) }
-//**********Callback 
 
-export default function Selectorwidget({list, callBack}){
+
+interface SelectorWidgetProps {
+    data: {id: number; displayString: string}[]
+    callBack: (choiceArray: number[]) => void
+}
+
+type CheckBoxProps = {
+    id: number,
+    displayString: string,
+    handleCheckAction: (id: number) => any
+}
+
+export default function SelectorWidget(props: SelectorWidgetProps){
     
-    let [isOpen, setOpen] = useState(false)
-    let [selection, setSelection] = useState([])
-    const accordionRef  = useRef(null);    
+    let [isOpen, setOpen] = useState<boolean>(false)
+    let [selection, setSelection] = useState<number[]>([])
+    const accordionRef  = useRef<any>(null);    
     
     //****Visual logic
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (event: any) => {
             if (accordionRef.current && !accordionRef.current.contains(event.target)) {
                 setOpen(false);
             }
@@ -34,18 +43,19 @@ export default function Selectorwidget({list, callBack}){
     
     
     //****Internal logic
-    const handleChecking = (id) => {
-        let newSelection = [...selection];
+    //Verifies if selected id in selection state. If so removes it, else add to it. Calls callback from parent
+    const handleCheckAction = (id: number) => {
+        let newSelection: number[] = [...selection];
         newSelection.includes(id)
         ? newSelection.splice(newSelection.indexOf(id), 1)
         : newSelection.push(id)
         setSelection(newSelection)
-        callBack(newSelection)
+        props.callBack(newSelection)
     }
 
 
 
-    const checkboxCollection = list.map((item) => <Checkbox id={item.id} handleChecking={handleChecking} displayString={item.displayString}/>)
+    const checkboxCollection = props.data.map((item) => <Checkbox id={item.id} handleCheckAction={handleCheckAction} displayString={item.displayString}/>)
     
     
 
@@ -68,21 +78,21 @@ export default function Selectorwidget({list, callBack}){
     )
 }
 
-function Checkbox({id, handleChecking, displayString}){
+function Checkbox(props: CheckBoxProps){
     
     const [checked, setChecked] = useState(false)
 
-    function handleChange(e){
+    function handleChange(e: React.ChangeEvent<HTMLInputElement>){
         setChecked(!checked)
-        handleChecking(e.target.name)
+        props.handleCheckAction(parseInt(e.target.name))
     }
 
 
     return(
         <> 
             <div className="checkbox-list-item">
-                <label htmlFor={id}>{displayString}</label>
-                <input className="itemBox" type="checkbox" name={id} onChange={handleChange}/>
+                <label htmlFor={props.id.toString()}>{props.displayString}</label>
+                <input className="itemBox" type="checkbox" name={props.id.toString()} onChange={handleChange}/>
             </div>
         </>
     ) 

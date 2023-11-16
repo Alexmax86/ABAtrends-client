@@ -43,5 +43,5 @@ import {
         }
       }    
     }
-    return <Line data={graphData} options={options}/>;
+    return <Line data={graphData} options={options} responsive={true} />;
   };

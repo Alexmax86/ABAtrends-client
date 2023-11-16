@@ -1,10 +1,7 @@
-import React from "react";
 import {useState, useEffect} from "react"
 import UserTable, { TableCell, TableRow, UserTableProps }  from "../../components/usertable/usertable";
 
-
-
-export default function Operators(){  
+export default function Patients(){
     type ParsedRow = {
         id: number,
         name: string,
@@ -22,7 +19,7 @@ export default function Operators(){
     useEffect(() => {
         async function getData(){
           try{
-            const resp = await fetch(process.env.REACT_APP_API_URL + '/gettherapists');
+            const resp = await fetch(process.env.REACT_APP_API_URL + '/getpatients');
             const json: ParsedData = await resp.json();
             setData(json);
           }

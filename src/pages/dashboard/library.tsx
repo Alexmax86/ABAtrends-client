@@ -24,22 +24,10 @@ export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):{
 
 }
 
-export async function getSessionsData(filterSelectionData: Types.FilterSelectionDataType):Promise<Types.SessionApiDataType>{
+export async function getApiData(filterSelectionData: Types.FilterSelectionDataType):Promise<Types.ApiDataType>{
   const resp = await fetch(process.env.REACT_APP_API_URL + `/getsessions?patientsids=${filterSelectionData.patientsIds}&therapistsids=${filterSelectionData.therapistsIds}&startdate=${filterSelectionData.startDate}&enddate=${filterSelectionData.endDate}`);
   const json = await resp.json(); 
   return json || []
 }
 
-export function createDataSets(sessionApiData:Types.SessionApiDataType):Types.GraphPropsType{
-  const graphProps:Types.GraphPropsType= {datasets: []}
 
-  //Get list of unique patients IDs
-  let list:number[] = []
-  sessionApiData.forEach(session => session.id ! in list && list.push(session.id))
-  
-  sessionApiData.forEach(session => {
-    
-  })
-  
-  
-}

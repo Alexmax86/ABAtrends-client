@@ -6,7 +6,7 @@
   box-sizing: border-box;
   margin-left: 5rem;              
   background-color: var(--bg-tertiary);
-  padding:2rem;
+  padding: 2rem;
   min-height: 100%;
   transition: margin-left 200ms ease;
   

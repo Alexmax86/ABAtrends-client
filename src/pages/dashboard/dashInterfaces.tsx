@@ -31,13 +31,7 @@ export type FiltersPanelPropsType = {
     setFilterSelectionData: React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>
 } 
 
-export type SessionApiDataType = {
-    id: number,
-    therapist_id: number,
-    patient_id: number,
-    date: DateString,
-    responses: number
-}[]
+
 
 export type GraphDataPoint = {
     x: DateString, 
@@ -55,6 +49,18 @@ export type GraphDataSet = {
 export interface GraphPropsType{
     datasets: GraphDataSet[]
 }
+
+//Data for graph as it's received from API
+export interface ApiSessionData {    
+    date: DateString,
+    patient_id: number,
+    therapist_id: number,
+    Patient_name: string,
+    Therapist_name: string,
+    responses: number      
+}
+
+export type ApiDataType = ApiSessionData[][]
 
 
 

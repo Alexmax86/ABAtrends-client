@@ -1,0 +1,27 @@
+.dashboard-container{
+    height: calc(100vh - 4rem);
+    
+}
+
+.filters-panel-container{
+    height:10%;
+    
+}
+
+.graph-container{    
+    height:90%;
+    width: 90%;    
+    margin: auto;
+}
+
+@media only screen and (max-width: 600px){
+    .filters-panel-container{
+        height:auto;        
+    }
+
+    .graph-container{    
+        height:90%;
+        width: 90%;    
+        margin: auto;
+    }
+}

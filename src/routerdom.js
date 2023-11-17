@@ -10,17 +10,18 @@ import {
 
 import Home from './pages/home/home';
 
-
+import { Button, ConfigProvider, Space } from 'antd';
 
 import Layout from './pages/layout/layout';
 import Patients from "./pages/patients/patients";
 import Dashboard from "./pages/dashboard/dashboard"
 import Operators from "./pages/operators/operators"
 import Session from "./pages/session/session"
-import Testpage from "./pages/testpage.tsx";
+import Testpage from "./pages/testpage";
 
 
 export default function Routerdom() {
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -64,4 +65,5 @@ export default function Routerdom() {
 
   return <RouterProvider router = {router}/>
 }
+
 

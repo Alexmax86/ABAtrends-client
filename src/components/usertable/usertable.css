@@ -4,24 +4,24 @@
        
 }
 
-tr{    
+.customTable tr{    
     background-color: var(--text-secondary);    
     box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
     border: solid 2px !important;
 }
 
-tr:hover{
+.customTable tr:hover{
     background-color: white;
 }
 
 
-td, th{
+.customTable td, th{
     text-align: left; 
     padding: 30px;    
 }
 
-th{
-    background-color: var(--bg-primary);
+.customTable th{
+    background-color: var(--bckg-primary);
     color: var(--text-secondary)
 }
 
@@ -30,15 +30,15 @@ th{
         margin: auto;
         border-spacing: 0 30px;
     }
-    th{
+    .customTable th{
         display: none;
     }
-    td{
+    .customTable td{
         display: block;
         text-align: right;
     }
 
-    td::before {        
+    .customTable td::before {        
         content: attr(data-label);
         display: block;
         float: left;

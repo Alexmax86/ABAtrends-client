@@ -2,8 +2,10 @@ import './filterspanel.css'
 import { useState, useEffect, useContext  } from 'react';
 import SelectorWidget from '../../../../components/selectorwidget';
 import DateWidget from '../../../../components/dateWidget';
+import { DatePicker, Button } from 'antd';
 import * as Types from '../../dashInterfaces'
 import * as Lib from '../../library'
+import dayjs from 'dayjs';
 
 export default function FiltersPanel(props:Types.FiltersPanelPropsType){    
     const [patientsSelection, setPatientsSelection] = useState<number[]>([]);
@@ -31,17 +33,29 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
                 endDate: finalDate })
         }
     }, [patientsSelection, therapistsSelection, initialDate, finalDate])
+
+    const handleDateChange = (date:any, dateString:any) => {
+        // Update the state in the parent component with the selected date
+        
+        setInitialDate(dateString[0]);
+        setFinalDate(dateString[1]);
+        
+      }; 
     
     return(
     <div className="filterPanel">
         <span>
-            <label htmlFor="initial-date"> Initial date:</label>
-            <DateWidget callBack={initialDateCallback} name="initial-date"/>
-        </span>
-        <span>
-            <label htmlFor="final-date"> Final date:</label>
-            <DateWidget callBack={finalDateCallback}  name="initial-date"/>
-        </span>
+            <DatePicker.RangePicker onChange={handleDateChange} 
+            presets={[
+                {label:"Last week", value:[dayjs().subtract(1, 'week'), dayjs() ]},
+                {label:"Last 2 weeks", value:[dayjs().subtract(2, 'week'), dayjs() ]},
+                {label:"Last month", value:[dayjs().subtract(1, 'month'), dayjs() ]},
+                {label:"Last 6 months", value:[dayjs().subtract(6, 'month'), dayjs() ]},
+                {label:"Last year", value:[dayjs().subtract(12, 'month'), dayjs() ]}
+                
+                ]}/>
+            
+        </span>        
 
         <span>
             <label htmlFor="box">Patient:</label>

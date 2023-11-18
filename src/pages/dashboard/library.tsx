@@ -30,4 +30,29 @@ export async function getApiData(filterSelectionData: Types.FilterSelectionDataT
   return json || []
 }
 
+export function apiToGraph(apiData:Types.ApiDataType):Types.GraphPropsType{
+  const tempGraphProps:any = {datasets:[]} 
+  apiData.forEach(patientData => 
+    {      
+      let graphDataSet:Types.GraphDataSet = {
+        label: patientData[0].Patient_name,
+        data: [],
+        backgroundColor: 'black',
+        borderColor: 'black',
+        tension: 0.4        
+      }
+      patientData.forEach(session =>{
+        let dataPoint:Types.GraphDataPoint = {
+          x: session.date,
+          y: session.responses
+        }
+        graphDataSet.data.push(dataPoint)
+      })
+      tempGraphProps.datasets.push(graphDataSet)
+      
+    })
+    return tempGraphProps
+}
+
+
 

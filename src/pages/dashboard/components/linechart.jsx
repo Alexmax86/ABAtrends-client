@@ -7,11 +7,13 @@ import {
     PointElement,
     Tooltip,
     Legend,
-    Colors
+    Colors,
+    BarController,
+    BarElement
   } from 'chart.js'
   
   import 'chartjs-adapter-date-fns'
-  import { Line } from 'react-chartjs-2'
+  import { Line, Bar } from 'react-chartjs-2'
   
   
   ChartJS.register(
@@ -21,10 +23,13 @@ import {
     PointElement,
     Tooltip,
     Legend,
-    Colors
+    Colors,
+    BarController,
+    BarElement
   )
   
   
+
   export default function LineChart({graphData}) {
     
     

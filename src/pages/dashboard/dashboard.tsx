@@ -15,7 +15,9 @@ export default function Dashboard(){
   //Contains data fetched from the API
   const [apiData, setApiData] = useState<Types.ApiDataType>([])
   //Contains data from the API manipulated to be plugged in the graph
-  const [graphData, setGraphData] = useState<Types.GraphPropsType>({datasets:[]})
+  const [graphData, setGraphData] = useState<Types.GraphPropsType>({datasets:[]});
+  
+  const [graphConfiguration, setGraphConfiguration] = useState<Types.GraphConfiguration>({type: 'Line', tension: 0.4})
 
   //Fetch list of patients and therapist, set filtersContent state
   useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
@@ -27,34 +29,8 @@ export default function Dashboard(){
     )()}, [filterSelectionData]);
   
   
-  //manipulate apiData to feed into graphData state
-  
-  useEffect(()=>{
-    const tempGraphProps:any = {datasets:[]}    
-    apiData.forEach(patientData => 
-      {      
-        let graphDataSet:Types.GraphDataSet = {
-          label: patientData[0].Patient_name,
-          data: [],
-          backgroundColor: 'black',
-          borderColor: 'black',
-          tension: 0.4        
-        }
-        patientData.forEach(session =>{
-          let dataPoint:Types.GraphDataPoint = {
-            x: session.date,
-            y: session.responses
-          }
-          graphDataSet.data.push(dataPoint)
-        })
-        tempGraphProps.datasets.push(graphDataSet)
-      })    
-    setGraphData(tempGraphProps) 
-    }, [apiData])
-  
-
-
-  
+  //manipulate apiData to feed into graphData state  
+  useEffect(()=>{ setGraphData(Lib.apiToGraph(apiData)) }, [apiData]) 
   
   return (    
     <div className='dashboard-container'>

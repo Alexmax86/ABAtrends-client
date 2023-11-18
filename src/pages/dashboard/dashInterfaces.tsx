@@ -50,6 +50,11 @@ export interface GraphPropsType{
     datasets: GraphDataSet[]
 }
 
+export interface GraphConfiguration{
+    type: 'Line' | 'Column';
+    tension: number;
+}
+
 //Data for graph as it's received from API
 export interface ApiSessionData {    
     date: DateString,

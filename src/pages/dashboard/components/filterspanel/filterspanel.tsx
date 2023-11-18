@@ -2,7 +2,8 @@ import './filterspanel.css'
 import { useState, useEffect, useContext  } from 'react';
 import SelectorWidget from '../../../../components/selectorwidget';
 import DateWidget from '../../../../components/dateWidget';
-import { DatePicker, Button } from 'antd';
+import { DatePicker, Radio } from 'antd';
+import type { RadioChangeEvent } from 'antd';
 import * as Types from '../../dashInterfaces'
 import * as Lib from '../../library'
 import dayjs from 'dayjs';
@@ -12,6 +13,7 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
     const [therapistsSelection, setTherapistsSelection] = useState<number[]>([]);
     const [initialDate, setInitialDate] = useState<Types.DateString | undefined>(undefined);
     const [finalDate, setFinalDate] = useState<Types.DateString | undefined>(undefined);
+    const [switchValue, setSwitchValue] = useState('Line');
     
     //Retrieves display string lists to feed dropdown menus
     const patientsDisplayStrings = Lib.actorDataToDisplayStrings(props.filtersContent?.patientsList)
@@ -22,7 +24,10 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
     const finalDateCallback = (arg: Types.DateString) => {setFinalDate(arg)}
     const patientsSelectionCallBack = (arg:number[]) => (setPatientsSelection(arg))
     const therapistsSelectionCallBack = (arg:number[]) => (setTherapistsSelection(arg))
-
+    const onSwitchChange = ({ target: { value } }: RadioChangeEvent) => {
+        console.log('radio4 checked', value);
+        setSwitchValue(value);
+      };
     
     useEffect(() => {
         if (initialDate != null && finalDate != null){            
@@ -58,7 +63,7 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
         </span>        
 
         <span>
-            <label htmlFor="box">Patient:</label>
+            <label htmlFor="box">Patient:</label>            
             <SelectorWidget data = {patientsDisplayStrings} callBack={patientsSelectionCallBack}></SelectorWidget>
         </span>
 
@@ -66,6 +71,7 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
             <label htmlFor="box">Therapist:</label>
             <SelectorWidget data = {therapistsDisplayStrings} callBack={therapistsSelectionCallBack}></SelectorWidget>
         </span>
+        <Radio.Group options={[{label: 'Line', value: 'Line'}, {label: 'Column', value: 'Column'}]} onChange={onSwitchChange} value={switchValue} optionType="button" />
     </div>
     )
 }

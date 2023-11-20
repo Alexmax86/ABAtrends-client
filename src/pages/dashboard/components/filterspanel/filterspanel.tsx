@@ -2,8 +2,8 @@ import './filterspanel.css'
 import { useState, useEffect, useContext  } from 'react';
 import SelectorWidget from '../../../../components/selectorwidget';
 import DateWidget from '../../../../components/dateWidget';
-import { DatePicker, Radio } from 'antd';
-import type { RadioChangeEvent } from 'antd';
+import { DatePicker, Radio, Select } from 'antd';
+import type { RadioChangeEvent, SelectProps } from 'antd';
 import * as Types from '../../dashInterfaces'
 import * as Lib from '../../library'
 import dayjs from 'dayjs';
@@ -24,12 +24,15 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
     const finalDateCallback = (arg: Types.DateString) => {setFinalDate(arg)}
     const patientsSelectionCallBack = (arg:number[]) => (setPatientsSelection(arg))
     const therapistsSelectionCallBack = (arg:number[]) => (setTherapistsSelection(arg))
+        
     const onSwitchChange = ({ target: { value } }: RadioChangeEvent) => {
-        console.log('radio4 checked', value);
-        setSwitchValue(value);
+        console.log("Setting graphtype to " + value)
+        setSwitchValue(value)
+        props.setChartType(value)
       };
     
-    useEffect(() => {
+    //Set state for user selection only if dates not null
+      useEffect(() => {
         if (initialDate != null && finalDate != null){            
             props.setFilterSelectionData({
                 patientsIds: patientsSelection, 
@@ -72,6 +75,15 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
             <SelectorWidget data = {therapistsDisplayStrings} callBack={therapistsSelectionCallBack}></SelectorWidget>
         </span>
         <Radio.Group options={[{label: 'Line', value: 'Line'}, {label: 'Column', value: 'Column'}]} onChange={onSwitchChange} value={switchValue} optionType="button" />
+        <Select
+          mode="multiple"
+          size={'middle'}
+          placeholder="Please select"
+          defaultValue={['a10', 'c12']}
+          
+          style={{ width: '20%' }}
+          options={[{label: 'Line', value: 'Line'}, {label: 'Column', value: 'Column'}]}
+        />
     </div>
     )
 }

@@ -16,7 +16,7 @@ import {
   import { Line, Bar } from 'react-chartjs-2'
   
   
-  ChartJS.register(
+  ChartJS.register(    
     LineElement,
     TimeScale, //timescale
     LinearScale,
@@ -30,7 +30,7 @@ import {
   
   
 
-  export default function LineChart({graphData}) {
+  export default function LineChart({graphData, graphConfiguration}) {
     
     
     const options = {
@@ -48,5 +48,11 @@ import {
         }
       }    
     }
-    return <Line data={graphData} options={options} responsive={true} />;
+    return (
+      
+      graphConfiguration.type === 'Line' 
+      ? ( <Line data={graphData} options={options} responsive={true} /> ) 
+      : ( <Bar data={graphData} options={options} responsive={true} />  )
+    
+    );
   };

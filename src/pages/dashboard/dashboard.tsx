@@ -1,5 +1,5 @@
 // @ts-ignore
-import LineChart from './components/linechart';
+import LineChart from './components/linechart.jsx';
 import FiltersPanel from './components/filterspanel/filterspanel';
 import {useState, useEffect } from 'react';
 
@@ -30,15 +30,27 @@ export default function Dashboard(){
   
   
   //manipulate apiData to feed into graphData state  
-  useEffect(()=>{ setGraphData(Lib.apiToGraph(apiData)) }, [apiData]) 
+  useEffect(()=>{ setGraphData(Lib.apiToGraph(apiData)) }, [apiData])
+  
+  const setChartType = (arg:Types.ChartType) => {
+    const newConfiguration: Types.GraphConfiguration = { ...graphConfiguration };
+    newConfiguration.type = arg    
+    setGraphConfiguration(newConfiguration)
+  }
+
+
   
   return (    
     <div className='dashboard-container'>
       <div className='filters-panel-container'>            
-        <FiltersPanel filtersContent= {filtersContent} setFilterSelectionData= {setFilterSelectionData} />
+        <FiltersPanel 
+          filtersContent= {filtersContent} 
+          setFilterSelectionData= {setFilterSelectionData} 
+          setChartType={setChartType} 
+        />
       </div>
       <div className='graph-container'>
-        <LineChart graphData={graphData}></LineChart>
+        <LineChart graphData={graphData} graphConfiguration={graphConfiguration} ></LineChart>
       </div>
     </div>
   )

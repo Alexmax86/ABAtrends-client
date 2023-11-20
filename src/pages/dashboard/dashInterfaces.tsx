@@ -28,7 +28,8 @@ export type FilterSelectionDataType = {
 
 export type FiltersPanelPropsType = {
     filtersContent?: FiltersContentType,
-    setFilterSelectionData: React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>
+    setFilterSelectionData: React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>,
+    setChartType: (arg:ChartType)=> void;
 } 
 
 
@@ -50,8 +51,10 @@ export interface GraphPropsType{
     datasets: GraphDataSet[]
 }
 
-export interface GraphConfiguration{
-    type: 'Line' | 'Column';
+export type ChartType = 'Line' | 'Column'
+
+export type GraphConfiguration = {
+    type: ChartType;
     tension: number;
 }
 

@@ -7,6 +7,9 @@
   margin-left: 5rem;              
   background-color: var(--bg-tertiary);
   padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
   min-height: 100%;
   transition: margin-left 200ms ease;
   

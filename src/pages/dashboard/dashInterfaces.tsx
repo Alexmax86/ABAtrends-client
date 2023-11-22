@@ -12,9 +12,16 @@ export type Actor = {
     age: number
 }
 
+export type TrainingType = {
+    id: number,
+    name: string,
+    description: string
+}
+
 export type FiltersContentType = {    
     patientsList: Actor[],
-    therapistsList: Actor[]    
+    therapistsList: Actor[],
+    trainingTypesList: TrainingType[]    
 }
 
 export type DateString = `${number}-${string}-${string}`;
@@ -22,6 +29,7 @@ export type DateString = `${number}-${string}-${string}`;
 export type FilterSelectionDataType = {
     patientsIds: number[],
     therapistsIds: number[],
+    trainingId: number | undefined,
     startDate: DateString,
     endDate: DateString
 }

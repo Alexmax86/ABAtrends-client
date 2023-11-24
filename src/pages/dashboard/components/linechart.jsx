@@ -37,7 +37,7 @@ import {
       scales:{
         x: {
           type: 'time',
-          time: {unit: 'day'},
+          time: {unit: 'day', tooltipFormat: 'MMM d, yyyy'},
           ticks: {color: 'white'}
         },
         y: {beginAtZero: true}
@@ -45,8 +45,20 @@ import {
       plugins: {
         colors: {
           forceOverride: true
-        }
-      }    
+        },
+        tooltip:{
+          callbacks:{
+            title: (context) => context[0].dataset.data[context.dataIndex],
+            label: function (context) {
+              let therapist = context.dataset.data[context.dataIndex].therapist //for 'context.dataset' children check interface GraphDataSet
+              let responses = context.dataset.data[context.dataIndex].y
+              return [`Responses: ${responses}`, `Therapist: ${therapist}`]
+              
+            }
+          }
+        } 
+      },
+         
     }
     return (
       

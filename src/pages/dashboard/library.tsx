@@ -1,19 +1,24 @@
 import * as Types from './dashInterfaces'
 
+
 //Calls API and forms the FiltersContent object that contains list of patients and therapists
 export async function getFiltersContent(): Promise<Types.FiltersContentType> {
-           
+        const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
+        const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
+        const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
         const filtersContent: Types.FiltersContentType = {
-            patientsList: await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json(),
-            therapistsList: await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json(),
-            trainingTypesList: await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
+            patientsList: actorDataToDisplayStrings(patientsListApi),
+            therapistsList: actorDataToDisplayStrings(therapistsListApi),
+            trainingTypesList: trainingDataToDisplayStrings(trainingListApi)
         }
-        return filtersContent             
-      
+        console.log(filtersContent)
+        return filtersContent 
 }
 
+
+
 //Helper to extract display strings from API Actors data
-export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):{value: number; label: string}[]{
+export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):Types.SelectorDataType{
   if (userData === undefined) {return []}
   else {
     return (userData?.map((actor: Types.Actor) => {
@@ -25,7 +30,7 @@ export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):{
   }
 }
 
-export function trainingDataToDisplayStrings(data: Types.TrainingType[] | undefined):{value: number; label: string}[]{
+export function trainingDataToDisplayStrings(data: Types.TrainingType[] | undefined):Types.SelectorDataType{
   if (data === undefined) {return []}
   else {
     return (data?.map((training: Types.TrainingType) => {
@@ -57,7 +62,8 @@ export function apiToGraph(apiData:Types.ApiDataType):Types.GraphPropsType{
       patientData.forEach(session =>{
         let dataPoint:Types.GraphDataPoint = {
           x: session.date,
-          y: session.responses
+          y: session.responses,
+          therapist: session.Therapist_name
         }
         graphDataSet.data.push(dataPoint)
       })
@@ -73,6 +79,7 @@ export function parseStringArrToInt(arg:string | string[]){
   else {parsedValue = arg.map((str) => parseInt(str))}
   return parsedValue
 }
+
 
 
 

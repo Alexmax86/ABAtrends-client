@@ -7,17 +7,22 @@
     border-radius: 25px;
     margin-bottom: 15px;    
     background-color: var(--bckg-primary);
-    color: var(--text-secondary)
+    color: var(--text-secondary);
+    box-shadow: 10px 8px 16px 0px rgba(0, 0, 0, 0.5);
 }
 
-.filterPanel span{
-    display: flex;
-    flex-direction: row;
-    align-items: center;    
+.panel-container{
+    flex: 1 1 300px;
+    padding: 0 50px;
 }
-.filterPanel span label{
-    margin-right: 10px;
+
+.panel-labels{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 14px;
+
 }
+
 
 
 
@@ -31,22 +36,14 @@
 @media only screen and (max-width: 1360px)
 {
     .filterPanel{
-        
         align-items: center;
         padding: 5px;
         flex-wrap: wrap;
-
+        
     }
-    .filterPanel input, span{
-        margin: 15px;
+    .panel-container{
+        padding: 10px 50px;
     }
+    
 }
 
-@media (max-width: 480px) {
-    .ant-calendar-range {
-        width: 320px;
-    }
-    .ant-calendar-range-part {
-        width: 100%;
-    }
-}

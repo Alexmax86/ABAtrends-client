@@ -1,3 +1,4 @@
+
 export type CustomError = {
     message: string
 }
@@ -12,6 +13,8 @@ export type Actor = {
     age: number
 }
 
+export type SelectorDataType= {value: number; label: string}[] | undefined
+
 export type TrainingType = {
     id: number,
     name: string,
@@ -19,9 +22,9 @@ export type TrainingType = {
 }
 
 export type FiltersContentType = {    
-    patientsList: Actor[],
-    therapistsList: Actor[],
-    trainingTypesList: TrainingType[]    
+    patientsList: SelectorDataType,
+    therapistsList: SelectorDataType,
+    trainingTypesList: SelectorDataType    
 }
 
 export type DateString = `${number}-${string}-${string}`;
@@ -44,7 +47,8 @@ export type FiltersPanelPropsType = {
 
 export type GraphDataPoint = {
     x: DateString, 
-    y: number
+    y: number,
+    therapist: string
 }
 
 export type GraphDataSet = {
@@ -77,6 +81,11 @@ export interface ApiSessionData {
 }
 
 export type ApiDataType = ApiSessionData[][]
+
+export interface PanelPickerProps{
+    setFilterSelectionData:React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>,
+    data?: SelectorDataType
+}
 
 
 

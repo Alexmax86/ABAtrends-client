@@ -6,27 +6,34 @@ import { PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker
 
 interface MobileTrainingPickerProps{
     visibility : {
-      pickerVisible : boolean
-      setPickerVisible : Function
+      mobileTPickerVisible : boolean
+      setMobileTPickerVisible : Function
     },
     trainings: {label:string, value:number}[],    
-    setActorsSelection: Function
+    setTrainingSelection: Function
   }
 
 export default function MobileTrainingPicker(props: MobileTrainingPickerProps){
-    const {pickerVisible, setPickerVisible} = props.visibility    
+    const {mobileTPickerVisible, setMobileTPickerVisible} = props.visibility    
     const [value, setValue] = useState<(PickerValue)[]>(['M'])
 
     const basicColumn = [props.trainings]
     const handleConfirm = (value: PickerValue[], extend: PickerValueExtend) => {
-        const newState = {
-          therapist: extend.items[0],
-          patient: extend.items[1]
-        }
+        
         setValue(value)  
-        props.setActorsSelection(newState)}
+        props.setTrainingSelection(extend.items[0])}
     return(
-        <p>asdasd</p>
+      <Picker
+      columns={basicColumn}
+      visible={mobileTPickerVisible}            
+      value={value}
+      onConfirm={handleConfirm}
+      onClose={() => {
+        setMobileTPickerVisible(false)
+      }}
+      title="Select training"
+      
+  />
     )
 
 }

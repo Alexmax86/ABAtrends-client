@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Routerdom from './routerdom';
+import { ConfigProvider, ErrorBlock } from 'antd-mobile'
+import enUS from 'antd-mobile/es/locales/en-US'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+//Contexts Antd mobile configprovider and routerdom
 root.render(
-  <React.StrictMode>
-    <Routerdom />
+  <React.StrictMode>    
+    <ConfigProvider locale={enUS}>
+      <Routerdom />
+    </ConfigProvider>
   </React.StrictMode>
 );
 

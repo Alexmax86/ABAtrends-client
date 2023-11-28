@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Picker, Button, Space, Toast } from 'antd-mobile'
-import { ConfigProvider, ErrorBlock } from 'antd-mobile'
-import enUS from 'antd-mobile/es/locales/en-US'
+
+
 import { PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker-view"
 
 interface ActorPickerProps{
@@ -32,7 +32,7 @@ export default function ActorPicker(props : ActorPickerProps){
       setValue(value)  
       props.setActorsSelection(newState)}
    return(
-    <ConfigProvider locale={enUS}>
+    
         <Picker
             columns={basicColumns}
             visible={pickerVisible}            
@@ -44,7 +44,7 @@ export default function ActorPicker(props : ActorPickerProps){
             title="Select therapist and patient"
             
         />
-    </ConfigProvider>
+    
     
    )
 }

@@ -2,6 +2,11 @@
   box-sizing: border-box;
 }
 
+:root:root {
+  --adm-color-primary: #a062d4;
+  --adm-color-success: var(--svg-icons-color);
+}
+
 :root{
   font-size: 18px;
   font-family: sans-serif;
@@ -13,6 +18,7 @@
   --transition-speed: 600ms;
   --svg-icons-color: #f5ad31;
   height:100vh;
+  
 }
 
 body, #root {

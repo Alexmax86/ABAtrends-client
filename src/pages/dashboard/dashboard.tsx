@@ -4,7 +4,7 @@ import FiltersPanel from './components/filterspanel/filterspanel';
 import {useState, useEffect } from 'react';
 
 import * as Types from './dashInterfaces'
-import * as Lib from './library'
+import * as Lib from '../../helpers/library'
 import "./dashboard.css"
 
 export default function Dashboard(){

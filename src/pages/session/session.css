@@ -1,0 +1,113 @@
+
+.session-viewport{
+    display: flex;
+    flex-direction: column;
+    
+    height: calc(100vh - 6rem);
+}
+
+.session-panel{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: left;
+    flex-wrap: wrap;
+    padding: 25px;
+    border-radius: 25px;
+    margin-bottom: 15px;    
+    background-color: var(--bckg-primary);
+    color: var(--text-secondary);
+    box-shadow: 10px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    font-size: large;
+    padding: 5px 15px;
+}
+
+.session-panel-container{
+    flex: 1 1 300px;
+    padding: 0 50px;
+    
+}
+
+
+
+.session-panel-internal-container{
+    display: flex;
+    flex-direction: row;    
+}
+
+.session-button-container{
+    margin: auto;
+    min-width: 150px;
+}
+
+
+
+.session-panel-label-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.session-panel-selection-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    flex-grow: 1;
+
+}
+
+.session-panel-date-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.session-panel-labels{
+    margin-bottom: 0px;
+    margin-top: 0px;
+    font-size: 14px;
+}
+
+
+.session-panel-selection{
+    
+    background-color: white;
+    
+    border-radius: 4px;
+    
+    height: 30px;
+    
+    color: black;
+    padding:6px;
+    margin-left: 8px;
+    margin-right: 5px;
+    flex-grow: 1;
+    
+}
+
+.session-panel-training-internal-container{
+    padding: 10px;   
+    
+}
+
+.start-button{
+    margin-top: auto;
+}
+
+/*
+@media only screen and (max-width: 1360px)
+{
+    .session-panel{
+        align-items: left;
+        
+        padding: 5px 15px;
+
+        flex-wrap: wrap;
+        font-size: large;
+    }
+    .session-panel-container{
+        padding: 10px 50px;
+    }
+    
+}
+*/

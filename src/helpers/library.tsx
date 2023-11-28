@@ -1,8 +1,8 @@
-import * as Types from './dashInterfaces'
-
+import * as Types from '../pages/dashboard/dashInterfaces'
+import * as CommonTypes from './CommonTypes'
 
 //Calls API and forms the FiltersContent object that contains list of patients and therapists
-export async function getFiltersContent(): Promise<Types.FiltersContentType> {
+export async function getFiltersContent(): Promise<CommonTypes.FiltersContentType> {
         const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
         const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
         const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
@@ -11,7 +11,7 @@ export async function getFiltersContent(): Promise<Types.FiltersContentType> {
             therapistsList: actorDataToDisplayStrings(therapistsListApi),
             trainingTypesList: trainingDataToDisplayStrings(trainingListApi)
         }
-        console.log(filtersContent)
+        
         return filtersContent 
 }
 

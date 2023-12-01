@@ -11,7 +11,7 @@ interface ActorPickerProps{
   },
   therapists: {label:string, value:number}[],
   patients: {label:string, value:number}[],
-  setActorsSelection: Function
+  mobileSetActorsSelection: Function
 }
 
 export default function ActorPicker(props : ActorPickerProps){
@@ -30,7 +30,7 @@ export default function ActorPicker(props : ActorPickerProps){
         patient: extend.items[1]
       }
       setValue(value)  
-      props.setActorsSelection(newState)}
+      props.mobileSetActorsSelection(extend.items[0], extend.items[1])}
    return(
     
         <Picker

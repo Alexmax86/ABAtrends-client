@@ -6,15 +6,15 @@ import { PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker
 
 interface MobileTrainingPickerProps{
     visibility : {
-      mobileTPickerVisible : boolean
-      setMobileTPickerVisible : Function
+      pickerVisible : boolean
+      setPickerVisible : Function
     },
     trainings: {label:string, value:number}[],    
     setTrainingSelection: Function
   }
 
 export default function MobileTrainingPicker(props: MobileTrainingPickerProps){
-    const {mobileTPickerVisible, setMobileTPickerVisible} = props.visibility    
+    const {pickerVisible, setPickerVisible} = props.visibility    
     const [value, setValue] = useState<(PickerValue)[]>(['M'])
 
     const basicColumn = [props.trainings]
@@ -25,11 +25,11 @@ export default function MobileTrainingPicker(props: MobileTrainingPickerProps){
     return(
       <Picker
       columns={basicColumn}
-      visible={mobileTPickerVisible}            
+      visible={pickerVisible}            
       value={value}
       onConfirm={handleConfirm}
       onClose={() => {
-        setMobileTPickerVisible(false)
+        setPickerVisible(false)
       }}
       title="Select training"
       

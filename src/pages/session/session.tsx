@@ -1,107 +1,86 @@
-
 import { useState, useEffect } from "react"
-import {Button, PickerView} from 'antd-mobile'
+import {Button, Modal, Toast} from 'antd-mobile'
 import dayjs from 'dayjs'
-import ActorPicker from "./components/actorpicker"
-import MobileTrainingPicker from "./components/MobileTrainingPicker"
-import * as Lib from '../../helpers/library'
 import * as CommonTypes from '../../helpers/CommonTypes'
 import "./session.css"
-import { isDisabled } from "@testing-library/user-event/dist/utils"
+import ConfigView from "./components/ConfigView"
+import Recorder from "./components/Recorder"
+import {recordData} from "../../helpers/Apicaller"
 
 
-
-
-type ActorsSelectionStateProp = {
-  therapist: CommonTypes.SelectorItemType | undefined,
-  patient:CommonTypes.SelectorItemType | undefined
-} | undefined
-
-type TrainingSelectionStateProp = {label: string, value: number}
 
 export default function Session(){
-  const [pickerVisible, setPickerVisible] = useState<boolean>(false)
-  const [mobileTPickerVisible, setMobileTPickerVisible] = useState<boolean>(false)
-  const [filtersContent, setFiltersContent] = useState<CommonTypes.FiltersContentType>()
-  const [actorSelection, setActorsSelection] = useState<ActorsSelectionStateProp>()
-  const [trainingSelection, setTrainingSelection] = useState<TrainingSelectionStateProp>()
-  const [startIsDisabled, setStartIsDisabled] = useState<boolean>(true)
 
-  if(
-    filtersContent?.patientsList !== undefined 
-    && filtersContent.therapistsList !== undefined 
-    && trainingSelection !== undefined
-    && startIsDisabled !== false
-    ){
-    setStartIsDisabled(false)
-  }
+    const [userSelection, setUserSelection] = useState<CommonTypes.SelectionStateType>()
+    const [selectionComplete, setSelectionComplete] = useState<boolean>(false)
+    const [count, setCount] = useState<number>(0)
 
-  
-  useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
-  
-  console.log(actorSelection) 
- 
+    const dateString = dayjs().format('YYYY-MM-DD')
     
-   return(
-    <div className="session-viewport">
-      <div className="session-panel">
-        <div className="session-panel-date-container">
-          <h2>SESSION OF {dayjs().format('DD/MM/YYYY')}</h2>
-        </div>
+    //Using type assertion as values will be known at runtime by the point this is used
+    const jsonObject:CommonTypes.Api_SessionData = {
+        therapist_id: userSelection?.Therapist?.value as number,
+        patient_id: userSelection?.Patient?.value as number,
+        training_type_id: userSelection?.Training?.value as number,
+        date: dateString as CommonTypes.DateString,
+        responses: count
+    }
 
-      
-      </div>
-      
     
-      <div className="session-panel">
-        <div className="session-panel-internal-container">
-          <div className="session-panel-label-container">            
-            <p>THERAPIST:</p>
-            <p>PATIENT:</p>            
-          </div>
-          <div className="session-panel-selection-container">
-            <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{actorSelection?.therapist?.label || ""}</p>
-            <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{actorSelection?.patient?.label || ""}</p>
-          </div>
-        </div>
-        
-        <ActorPicker 
-          visibility= {{pickerVisible, setPickerVisible}}
-          therapists= {filtersContent?.therapistsList || []} 
-          patients= {filtersContent?.patientsList || []} 
-          setActorsSelection={setActorsSelection}
-          
-          />          
-        </div>
-      
+    
+    const confirmModal = () => {
+        Modal.confirm({
+            content: 'Are you sure you want to finish the session and send the data?',
+            confirmText:"Yes",
+            cancelText:"No",
+            onConfirm: async () => {
+                console.log("Modal code")
+              try{
+                await recordData(jsonObject)
+                Toast.show({
+                    icon: 'success',
+                    content: 'Data sent successfully',
+                    position: 'bottom',
+                  })
+              }
+              catch(err){
+                Modal.alert({
+                    confirmText: 'Ok',
+                    content: `An error occurred and the data is not saved. 
+                    Please retry, if the error persists contact your system administrator. ${err}`,
+                    closeOnMaskClick: true,
+                  })
+              }
+            },
+          })
+        }
+    
 
-        <div className="session-panel">
-          <div className="session-panel-internal-container">
-            <div className="session-panel-label-container">            
-              <p>TRAINING:</p>            
+    return(
+        <div className="session-viewport">
+            <div className="session-panel">
+                <div className="session-panel-date-container">
+                    <h2>SESSION OF {dateString}</h2>
+                        {selectionComplete 
+                        && <div className="info">
+                                <div className="info-item">
+                                    <span className="info-label">Therapist:</span>
+                                    <span className="info-value">John Doe</span>
+                                </div>
+                                <div className="info-item">
+                                    <span className="info-label">Patient:</span>
+                                    <span className="info-value">Alex Johnson</span>
+                                </div>
+                                
+                                 <span className="info-item-training">Objects visual recognition</span>
+                                
+                            </div>}
+                </div>      
             </div>
-            <div className="session-panel-selection-container">
-              <p className="session-panel-selection" onClick={() => setMobileTPickerVisible(true)}>{trainingSelection?.label}</p>            
-            </div>
-            <MobileTrainingPicker 
-              visibility={{mobileTPickerVisible, setMobileTPickerVisible}}
-              trainings={filtersContent?.trainingTypesList || []}
-              setTrainingSelection={setTrainingSelection} 
-            />
-              
-              
-          </div>                
+            {selectionComplete 
+                ? (<Recorder countState={{count, setCount}} confirmModal={confirmModal}/>) 
+                : (<ConfigView  userSelectionState={{userSelection, setUserSelection}} setSelectionComplete={setSelectionComplete}/>)
+            }
         </div>
-
-        <div className="start-button">          
-          <Button disabled={startIsDisabled} block color='success' style={{'--text-color': 'black'}} size='large' shape='rounded'>START</Button>
-        </div>
-        
-      </div>
-
-
-    
-    
-   )
-
+    )
 }

@@ -1,9 +1,10 @@
 
 .session-viewport{
     display: flex;
-    flex-direction: column;
-    
+    flex-direction: column;    
     height: calc(100vh - 6rem);
+    justify-content: space-evenly;
+    
 }
 
 .session-panel{
@@ -60,6 +61,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .session-panel-labels{
@@ -94,20 +96,17 @@
     margin-top: auto;
 }
 
-/*
-@media only screen and (max-width: 1360px)
-{
-    .session-panel{
-        align-items: left;
-        
-        padding: 5px 15px;
+/*INFO PANEL*/
 
-        flex-wrap: wrap;
-        font-size: large;
-    }
-    .session-panel-container{
-        padding: 10px 50px;
-    }
-    
+.info {display: flex; flex-direction: column; gap: 5px;}
+
+.info-item { display: flex; align-items: baseline;}
+
+.info-label { width: 120px; font-weight: bold;}
+  
+.info-value { margin-left: 10px;}
+
+.info-item-training{
+    display: flex; align-items: baseline; margin: auto;
 }
-*/
+

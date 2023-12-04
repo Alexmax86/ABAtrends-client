@@ -3,9 +3,10 @@ import {Button, Modal, Toast} from 'antd-mobile'
 import dayjs from 'dayjs'
 import * as CommonTypes from '../../helpers/CommonTypes'
 import "./session.css"
-import ConfigView from "./components/ConfigView"
-import Recorder from "./components/Recorder"
+import ConfigView from "./components/ConfigView/ConfigView"
+import Recorder from "./components/Recorder/Recorder"
 import {recordData} from "../../helpers/Apicaller"
+import {Panel} from '../../components/Common/Components'
 
 
 
@@ -17,7 +18,7 @@ export default function Session(){
 
     const dateString = dayjs().format('YYYY-MM-DD')
     
-    //Using type assertion as values will be known at runtime by the point this is used
+    //Preparing data object to be sent
     const jsonObject:CommonTypes.Api_SessionData = {
         therapist_id: userSelection?.Therapist?.value as number,
         patient_id: userSelection?.Patient?.value as number,
@@ -58,25 +59,29 @@ export default function Session(){
 
     return(
         <div className="session-viewport">
-            <div className="session-panel">
-                <div className="session-panel-date-container">
-                    <h2>SESSION OF {dateString}</h2>
-                        {selectionComplete 
-                        && <div className="info">
-                                <div className="info-item">
-                                    <span className="info-label">Therapist:</span>
-                                    <span className="info-value">John Doe</span>
-                                </div>
-                                <div className="info-item">
-                                    <span className="info-label">Patient:</span>
-                                    <span className="info-value">Alex Johnson</span>
-                                </div>
-                                
-                                 <span className="info-item-training">Objects visual recognition</span>
-                                
-                            </div>}
-                </div>      
+            
+            <div className="session-panel-outer">
+                <Panel>                
+                    <div className="session-panel-inner-container">
+                        <h2 className="date-header">SESSION OF {dateString}</h2>
+                            {selectionComplete 
+                            && <div className="info">
+                                    <div className="info-item">
+                                        <span className="info-label">Therapist:</span>
+                                        <span className="info-value">John Doe</span>
+                                    </div>
+                                    <div className="info-item">
+                                        <span className="info-label">Patient:</span>
+                                        <span className="info-value">Alex Johnson</span>
+                                    </div>
+                                    
+                                    <span className="info-item-training">Objects visual recognition</span>
+                                    
+                                </div>}
+                    </div>      
+                </Panel>
             </div>
+            
             {selectionComplete 
                 ? (<Recorder countState={{count, setCount}} confirmModal={confirmModal}/>) 
                 : (<ConfigView  userSelectionState={{userSelection, setUserSelection}} setSelectionComplete={setSelectionComplete}/>)

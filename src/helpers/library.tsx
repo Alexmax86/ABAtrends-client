@@ -3,7 +3,8 @@ import * as CommonTypes from './CommonTypes'
 
 //Calls API and forms the FiltersContent object that contains list of patients and therapists
 export async function getFiltersContent(): Promise<CommonTypes.FiltersContentType> {
-        const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
+  try{
+    const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
         const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
         const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
         const filtersContent: Types.FiltersContentType = {
@@ -13,6 +14,9 @@ export async function getFiltersContent(): Promise<CommonTypes.FiltersContentTyp
         }
         
         return filtersContent 
+  }
+  catch(err){ throw err}
+        
 }
 
 
@@ -43,9 +47,15 @@ export function trainingDataToDisplayStrings(data: Types.TrainingType[] | undefi
 }
 
 export async function getApiData(filterSelectionData: Types.FilterSelectionDataType):Promise<Types.ApiDataType>{
-  const resp = await fetch(process.env.REACT_APP_API_URL + `/getsessions?patientsids=${filterSelectionData.patientsIds}&therapistsids=${filterSelectionData.therapistsIds}&trainingtype=${filterSelectionData.trainingId}&startdate=${filterSelectionData.startDate}&enddate=${filterSelectionData.endDate}`);
-  const json = await resp.json(); 
-  return json || []
+  try{
+    const resp = await fetch(process.env.REACT_APP_API_URL + `/getsessions?patientsids=${filterSelectionData.patientsIds}&therapistsids=${filterSelectionData.therapistsIds}&trainingtype=${filterSelectionData.trainingId}&startdate=${filterSelectionData.startDate}&enddate=${filterSelectionData.endDate}`);
+    const json = await resp.json(); 
+    return json || []
+  }
+  catch(err){
+    throw(err as string)
+  }
+  
 }
 
 export function apiToGraph(apiData:Types.ApiDataType):Types.GraphPropsType{

@@ -1,0 +1,8 @@
+.Panel{
+    border-radius: 25px;        
+    background-color: var(--bckg-primary);
+    color: var(--text-secondary);
+    box-shadow: 10px 8px 16px 0px rgba(0, 0, 0, 0.5);
+    
+    padding: 5px 15px;
+}

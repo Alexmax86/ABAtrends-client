@@ -3,38 +3,25 @@
     display: flex;
     flex-direction: column;    
     height: calc(100vh - 6rem);
-    justify-content: space-evenly;
-    
+    justify-content: space-evenly;    
 }
 
-.session-panel{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: left;
-    flex-wrap: wrap;
-    padding: 25px;
-    border-radius: 25px;
-    margin-bottom: 15px;    
-    background-color: var(--bckg-primary);
-    color: var(--text-secondary);
-    box-shadow: 10px 8px 16px 0px rgba(0, 0, 0, 0.5);
-    font-size: large;
-    padding: 5px 15px;
+.session-panel-outer{
+    width: 100%;
 }
+
+
 
 .session-panel-container{
     flex: 1 1 300px;
     padding: 0 50px;
     
+    
 }
 
 
 
-.session-panel-internal-container{
-    display: flex;
-    flex-direction: row;    
-}
+
 
 .session-button-container{
     margin: auto;
@@ -57,11 +44,18 @@
 
 }
 
-.session-panel-date-container{
+.session-panel-inner-container{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    font-size: large;
+    padding: 20px 0px
+    
+}
+
+.date-header{
+    margin: 0px;
 }
 
 .session-panel-labels{
@@ -92,6 +86,11 @@
     
 }
 
+.record-buttons{
+    margin-bottom: 10px;
+    width: 100%;
+}
+
 .start-button{
     margin-top: auto;
 }
@@ -102,11 +101,20 @@
 
 .info-item { display: flex; align-items: baseline;}
 
-.info-label { width: 120px; font-weight: bold;}
+.info-label { width: 120px; ;}
   
 .info-value { margin-left: 10px;}
 
 .info-item-training{
-    display: flex; align-items: baseline; margin: auto;
+    display: flex; align-items: baseline; font-weight: bold;
 }
 
+@media only screen and (min-width: 600px) {
+     
+.session-viewport{    
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    
+}   
+}

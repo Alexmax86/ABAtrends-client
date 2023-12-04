@@ -1,0 +1,12 @@
+.session-panel-tpselector-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+     
+}
+
+.session-panel-tselector-container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;    
+}

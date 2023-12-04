@@ -2,6 +2,7 @@
 import LineChart from './components/linechart.jsx';
 import FiltersPanel from './components/filterspanel/filterspanel';
 import {useState, useEffect } from 'react';
+import {Modal} from 'antd-mobile'
 
 import * as Types from './dashInterfaces'
 import * as Lib from '../../helpers/library'
@@ -19,12 +20,40 @@ export default function Dashboard(){
   
   const [graphConfiguration, setGraphConfiguration] = useState<Types.GraphConfiguration>({type: 'Line', tension: 0.4})
 
+  const errorModal = (err:string) => {
+    Modal.alert({
+      confirmText: 'Ok',
+      content: `An error occurred reaching the server. 
+      Please retry, if the error persists contact your system administrator. ${err}`,
+      closeOnMaskClick: true,
+    })
+  }
   //Fetch list of patients and therapist, set filtersContent state
-  useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
+  useEffect(() => {
+      (async () => {        
+          try {
+            setFiltersContent(await Lib.getFiltersContent())  
+          } catch(err){
+            errorModal(err as string)
+          }
+      }
+      )()
+  }, []);
   
   //Watches filterSelectionData and fetch data according to it, store in apiData
+  
   useEffect(() => {(async () => {
-    filterSelectionData !== undefined && setApiData(await Lib.getApiData(filterSelectionData))    
+    try{
+      filterSelectionData !== undefined && setApiData(await Lib.getApiData(filterSelectionData))  
+    }
+    catch(err){
+      Modal.alert({
+        confirmText: 'Ok',
+        content: `An error occurred reaching the server. 
+        Please retry, if the error persists contact your system administrator. ${err}`,
+        closeOnMaskClick: true,
+      })
+    }
     }    
     )()}, [filterSelectionData]);
   

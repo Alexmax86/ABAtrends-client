@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react"
 import {Button, Picker} from 'antd-mobile'
 import dayjs from 'dayjs'
-import ActorPicker from "./actorpicker"
+import ActorPicker from "../actorpicker"
 import MobileTrainingPicker from "./MobileTrainingPicker"
-import * as Lib from '../../../helpers/library'
-import * as CommonTypes from '../../../helpers/CommonTypes'
+import * as Lib from '../../../../helpers/library'
+import * as CommonTypes from '../../../../helpers/CommonTypes'
+import {Panel} from '../../../../components/Common/Components'
+
+import './ConfigView.css'
+
 
 
 interface ConfigViewProps{
@@ -65,27 +69,30 @@ function ActorSelectorPanel(props:SelectorPanelProps){
           Patient: patient
         }
         ))
-
     }
     
     return (
-        <div className="session-panel">
-          <div className="session-panel-internal-container">
-            <div className="session-panel-label-container">            
-              <p>THERAPIST:</p>
-              <p>PATIENT:</p>            
+    <div className="session-panel-outer">
+        <Panel>
+          <div className="session-panel-inner-container">
+            <div className="session-panel-tpselector-container">
+              <div className="session-panel-label-container">            
+                <p>THERAPIST:</p>
+                <p>PATIENT:</p>            
+              </div>
+              <div className="session-panel-selection-container">
+                <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Therapist?.label || ""}</p>
+                <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Patient?.label || ""}</p>
+              </div>
             </div>
-            <div className="session-panel-selection-container">
-              <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Therapist?.label || ""}</p>
-              <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Patient?.label || ""}</p>
           </div>
-        </div>        
-        <ActorPicker 
-          visibility= {{pickerVisible, setPickerVisible}}
-          therapists= {props.filtersContent?.therapistsList || []} 
-          patients= {props.filtersContent?.patientsList || []} 
-          mobileSetActorsSelection={mobileSetActorsSelection}
-        />          
+          <ActorPicker 
+            visibility= {{pickerVisible, setPickerVisible}}
+            therapists= {props.filtersContent?.therapistsList || []} 
+            patients= {props.filtersContent?.patientsList || []} 
+            mobileSetActorsSelection={mobileSetActorsSelection}
+          />          
+        </Panel>
       </div>
     )
 }
@@ -102,8 +109,10 @@ function TrainingSelectorPanel(props: SelectorPanelProps){
 
 }
   return (
-  <div className="session-panel">
-          <div className="session-panel-internal-container">
+    <div className="session-panel-outer">
+      <Panel>
+        <div className="session-panel-inner-container">
+          <div className="session-panel-tselector-container">
             <div className="session-panel-label-container">            
               <p>TRAINING:</p>            
             </div>
@@ -115,9 +124,9 @@ function TrainingSelectorPanel(props: SelectorPanelProps){
               trainings={props.filtersContent?.trainingTypesList || []}
               setTrainingSelection={setTrainingSelection} 
             />
-              
-              
-          </div>                
-        </div>
+            </div>
+        </div>                
+      </Panel>
+    </div>
   )
 }

@@ -7,6 +7,7 @@ import ConfigView from "./components/ConfigView/ConfigView"
 import Recorder from "./components/Recorder/Recorder"
 import {recordData} from "../../helpers/Apicaller"
 import {Panel} from '../../components/Common/Components'
+import { ConfirmationModal } from "./components/ConfirmationModal/Confirmationmodal"
 
 
 
@@ -16,7 +17,7 @@ export default function Session(){
     const [selectionComplete, setSelectionComplete] = useState<boolean>(false)
     const [count, setCount] = useState<number>(0)
 
-    const dateString = dayjs().format('YYYY-MM-DD')
+    const dateString = dayjs().format('YYYY-MM-DD')    
     
     //Preparing data object to be sent
     const jsonObject:CommonTypes.Api_SessionData = {
@@ -27,35 +28,7 @@ export default function Session(){
         responses: count
     }
 
-    
-    
-    const confirmModal = () => {
-        Modal.confirm({
-            content: 'Are you sure you want to finish the session and send the data?',
-            confirmText:"Yes",
-            cancelText:"No",
-            onConfirm: async () => {
-                console.log("Modal code")
-              try{
-                await recordData(jsonObject)
-                Toast.show({
-                    icon: 'success',
-                    content: 'Data sent successfully',
-                    position: 'bottom',
-                  })
-              }
-              catch(err){
-                Modal.alert({
-                    confirmText: 'Ok',
-                    content: `An error occurred and the data is not saved. 
-                    Please retry, if the error persists contact your system administrator. ${err}`,
-                    closeOnMaskClick: true,
-                  })
-              }
-            },
-          })
-        }
-    
+    const confirmModal = () => ConfirmationModal(jsonObject) 
 
     return(
         <div className="session-viewport">

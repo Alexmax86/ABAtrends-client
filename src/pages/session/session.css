@@ -65,20 +65,15 @@
 }
 
 
-.session-panel-selection{
-    
-    background-color: white;
-    
-    border-radius: 4px;
-    
-    min-height: 30px;
-    
+.session-panel-selection{    
+    background-color: rgb(255, 255, 255);    
+    border-radius: 4px;    
+    min-height: 30px;    
     color: black;
     padding:6px;
     margin-left: 8px;
     margin-right: 5px;
-    flex-grow: 1;
-    
+    flex-grow: 1;    
 }
 
 .session-panel-training-internal-container{

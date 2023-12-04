@@ -1,6 +1,6 @@
 import {Button, Modal, Toast} from 'antd-mobile'
 import './recorder.css'
-import FinishButton from '../FinishButton'
+//import FinishButton from './Components/FinishButton'
 
 
 interface RecorderProps{

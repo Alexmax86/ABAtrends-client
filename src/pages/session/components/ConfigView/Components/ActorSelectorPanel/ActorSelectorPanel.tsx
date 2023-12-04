@@ -1,5 +1,6 @@
-import { Panel } from "../../../../../components/Common/Components"
-import * as CommonTypes from '../../../../../helpers/CommonTypes'
+import { Panel } from "../../../../../../components/Common/Components"
+
+import * as CommonTypes from '../../../../../../helpers/CommonTypes'
 import { useState, useEffect } from "react"
 import ActorPicker from "./actorpicker"
 
@@ -8,7 +9,7 @@ interface SelectorPanelProps{
     userSelectionState: CommonTypes.UserSelectionState    
 }
 
-function ActorSelectorPanel(props:SelectorPanelProps){
+export default function ActorSelectorPanel(props:SelectorPanelProps){
     const [pickerVisible, setPickerVisible] = useState<boolean>(false) 
 
     const mobileSetActorsSelection = (therapist: CommonTypes.SelectorItemType, patient:CommonTypes.SelectorItemType) => {
@@ -22,7 +23,7 @@ function ActorSelectorPanel(props:SelectorPanelProps){
     
     return (
     <div className="session-panel-outer">
-        <Panel>
+        <Panel>                    
           <div className="session-panel-inner-container">
             <div className="session-panel-tpselector-container">
               <div className="session-panel-label-container">            

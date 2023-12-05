@@ -8,7 +8,9 @@ import ActorSelectorPanel from "./Components/ActorSelectorPanel/ActorSelectorPan
 import TrainingSelectorPanel from "./Components/TrainingSelectorPanel/TrainingSelectorPanel"
 import './ConfigView.css'
 
-
+//*****************************************************************************/
+//This component handle the selection of the choices before starting a session
+//*****************************************************************************/ */
 
 interface ConfigViewProps{
   userSelectionState: CommonTypes.UserSelectionState

@@ -1,16 +1,14 @@
-export type UserSelectionState ={
-    
-        userSelection: SelectionStateType | undefined
-        setUserSelection: Function
-      
+export type UserSelectionState ={    
+        userSelection: SelectionStateType /*| undefined*/
+        setUserSelection: React.Dispatch<React.SetStateAction<SelectionStateType>>      
 }
 
 //Describes selection across all widgets (a therapist, a patient and a training)
 export type SelectionStateType = {
-    Therapist: SelectorItemType
-    Patient: SelectorItemType
-    Training: SelectorItemType
-}
+    Therapist: SelectorItemType | null
+    Patient: SelectorItemType | null
+    Training: SelectorItemType | null
+} 
 
 export type SelectorItemType= {value: number; label: string} | undefined
 

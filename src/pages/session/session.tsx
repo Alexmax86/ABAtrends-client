@@ -9,11 +9,16 @@ import {recordData} from "../../helpers/Apicaller"
 import {Panel} from '../../components/Common/Components'
 import { ConfirmationModal } from "./components/ConfirmationModal/Confirmationmodal"
 
+const emptyStateObj = {
+    Therapist:  null,
+    Patient:  null,
+    Training:  null
+}
 
 
 export default function Session(){
 
-    const [userSelection, setUserSelection] = useState<CommonTypes.SelectionStateType>()
+    const [userSelection, setUserSelection] = useState<CommonTypes.SelectionStateType>(emptyStateObj)
     const [selectionComplete, setSelectionComplete] = useState<boolean>(false)
     const [count, setCount] = useState<number>(0)
 

@@ -14,7 +14,7 @@ interface ActorPickerProps{
   mobileSetActorsSelection: Function
 }
 
-export default function ActorPicker(props : ActorPickerProps){
+export default function MobileActorPicker(props : ActorPickerProps){
     const {pickerVisible, setPickerVisible} = props.visibility
     
     const [value, setValue] = useState<(PickerValue)[]>(['M'])
@@ -31,8 +31,8 @@ export default function ActorPicker(props : ActorPickerProps){
       }
       setValue(value)  
       props.mobileSetActorsSelection(extend.items[0], extend.items[1])}
-   return(
-    
+
+   return(    
         <Picker
             columns={basicColumns}
             visible={pickerVisible}            
@@ -42,9 +42,6 @@ export default function ActorPicker(props : ActorPickerProps){
               setPickerVisible(false)
             }}
             title="Select therapist and patient"
-            
         />
-    
-    
    )
 }

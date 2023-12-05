@@ -2,7 +2,7 @@ import { Panel } from "../../../../../../components/Common/Components"
 
 import * as CommonTypes from '../../../../../../helpers/CommonTypes'
 import { useState, useEffect } from "react"
-import ActorPicker from "./actorpicker"
+import MobileActorPicker from "./MobileActorPicker"
 
 interface SelectorPanelProps{
     filtersContent: CommonTypes.FiltersContentType
@@ -36,7 +36,7 @@ export default function ActorSelectorPanel(props:SelectorPanelProps){
               </div>
             </div>
           </div>
-          <ActorPicker 
+          <MobileActorPicker 
             visibility= {{pickerVisible, setPickerVisible}}
             therapists= {props.filtersContent?.therapistsList || []} 
             patients= {props.filtersContent?.patientsList || []} 

@@ -36,7 +36,7 @@ export default function Session(){
     const confirmModal = () => ConfirmationModal(jsonObject) 
 
     return(
-        <div className="session-viewport">
+        <div className={selectionComplete ? 'session-viewport-record' : 'session-viewport-config'} >
             
             <div className="session-panel-outer">
                 <Panel>                
@@ -46,11 +46,11 @@ export default function Session(){
                             && <div className="info">
                                     <div className="info-item">
                                         <span className="info-label">Therapist:</span>
-                                        <span className="info-value">John Doe</span>
+                                        <span className="info-value">{userSelection.Therapist?.label}</span>
                                     </div>
                                     <div className="info-item">
                                         <span className="info-label">Patient:</span>
-                                        <span className="info-value">Alex Johnson</span>
+                                        <span className="info-value">{userSelection.Patient?.label}</span>
                                     </div>
                                     
                                     <span className="info-item-training">Objects visual recognition</span>

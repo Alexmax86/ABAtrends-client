@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Picker, Button, Space, Toast } from 'antd-mobile'
+import * as CommonTypes from '../../../../../../helpers/CommonTypes'
 
 
 import { PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker-view"
@@ -11,32 +12,29 @@ interface ActorPickerProps{
   },
   therapists: {label:string, value:number}[],
   patients: {label:string, value:number}[],
-  mobileSetActorsSelection: Function
+  userSelectionState: CommonTypes.UserSelectionState
 }
 
 export default function MobileActorPicker(props : ActorPickerProps){
-    const {pickerVisible, setPickerVisible} = props.visibility
-    
-    const [value, setValue] = useState<(PickerValue)[]>(['M'])
-
-    const basicColumns = [
-      props.therapists,
-      props.patients
-      ]
+    const {pickerVisible, setPickerVisible} = props.visibility     
 
     const handleConfirm = (value: PickerValue[], extend: PickerValueExtend) => {
-      const newState = {
-        therapist: extend.items[0],
-        patient: extend.items[1]
+      props.userSelectionState.setUserSelection((prevState:any) => ({
+        ...prevState,
+        Therapist: extend.items[0],
+        Patient: extend.items[1]
       }
-      setValue(value)  
-      props.mobileSetActorsSelection(extend.items[0], extend.items[1])}
+      ))
+    }
 
    return(    
         <Picker
-            columns={basicColumns}
+            columns={[props.therapists, props.patients]}
             visible={pickerVisible}            
-            value={value}
+            value={[
+              props.userSelectionState.userSelection.Therapist?.label as PickerValue,
+              props.userSelectionState.userSelection.Patient?.label as PickerValue
+            ]}
             onConfirm={handleConfirm}
             onClose={() => {
               setPickerVisible(false)

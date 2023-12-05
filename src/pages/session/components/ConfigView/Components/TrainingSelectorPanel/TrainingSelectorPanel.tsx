@@ -23,9 +23,9 @@ export default function TrainingSelectorPanel(props: SelectorPanelProps){
         ...prevState,
         Training: {label, value}      
       }
-      ))
-  
-  }
+      ))  
+    }
+
     return (
       <div className="session-panel-outer">
         <Panel>
@@ -46,7 +46,7 @@ export default function TrainingSelectorPanel(props: SelectorPanelProps){
                 <div className="DkPickerWrapper">
                     <Select
                     options= {props.filtersContent?.trainingTypesList}
-                    onChange= {setTrainingSelection }    
+                    onChange= {setTrainingSelection}    
                     style={{ width: '100%' }}
                     value={props.userSelectionState.userSelection?.Training?.label} 
                     placeholder="Please select..."

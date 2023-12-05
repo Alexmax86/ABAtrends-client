@@ -1,0 +1,14 @@
+.desktop-picker-wrapper{
+    display: none;
+}
+
+@media only screen and (min-width: 600px) {
+     
+    .mobile-picker-wrapper{
+        display: none;
+    }
+    .desktop-picker-wrapper{
+        display:block;
+        margin-left: 8px;
+    }
+    }

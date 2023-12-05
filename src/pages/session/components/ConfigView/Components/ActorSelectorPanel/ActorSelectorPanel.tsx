@@ -1,8 +1,9 @@
 import { Panel } from "../../../../../../components/Common/Components"
-
+import { Select } from 'antd';
 import * as CommonTypes from '../../../../../../helpers/CommonTypes'
 import { useState, useEffect } from "react"
 import MobileActorPicker from "./MobileActorPicker"
+import './ActorSelectorPanel.css'
 
 interface SelectorPanelProps{
     filtersContent: CommonTypes.FiltersContentType
@@ -12,14 +13,24 @@ interface SelectorPanelProps{
 export default function ActorSelectorPanel(props:SelectorPanelProps){
     const [pickerVisible, setPickerVisible] = useState<boolean>(false) 
 
-    const mobileSetActorsSelection = (therapist: CommonTypes.SelectorItemType, patient:CommonTypes.SelectorItemType) => {
-        props.userSelectionState.setUserSelection((prevState:any) => ({
-          ...prevState,
-          Therapist: therapist,
-          Patient: patient
-        }
-        ))
+    const handleDesktopTherapistSelection = (therapist: CommonTypes.SelectorItemType, options: any) => {      
+      const {label, value} = options
+      props.userSelectionState.setUserSelection((prevState:any) => ({        
+        ...prevState,
+        Therapist: {label, value}
+      }
+      ))  
     }
+
+    const handleDesktopPatientSelection = (patient: CommonTypes.SelectorItemType, options: any) => {      
+      const {label, value} = options
+      props.userSelectionState.setUserSelection((prevState:any) => ({        
+        ...prevState,
+        Patient: {label, value}
+      }
+      ))  
+    }
+    
     
     return (
     <div className="session-panel-outer">
@@ -31,8 +42,30 @@ export default function ActorSelectorPanel(props:SelectorPanelProps){
                 <p>PATIENT:</p>            
               </div>
               <div className="session-panel-selection-container">
-                <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Therapist?.label || ""}</p>
-                <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Patient?.label || ""}</p>
+                <div className="mobile-picker-wrapper">
+                  <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Therapist?.label || ""}</p>
+                </div>
+                <div className="desktop-picker-wrapper">
+                  <Select
+                      options= { props.filtersContent?.therapistsList }
+                      onChange= { handleDesktopTherapistSelection }    
+                      style={{ width: '100%' }}
+                      value={props.userSelectionState.userSelection?.Therapist} 
+                      placeholder="Please select..."
+                      />
+                  </div>
+                <div className="mobile-picker-wrapper">
+                  <p className="session-panel-selection" onClick={() => setPickerVisible(true)}>{props.userSelectionState.userSelection?.Patient?.label || ""}</p>
+                </div>
+                <div className="desktop-picker-wrapper">
+                  <Select
+                      options= {props.filtersContent?.patientsList}
+                      onChange= { handleDesktopPatientSelection }    
+                      style={{ width: '100%' }}
+                      value={props.userSelectionState.userSelection?.Patient} 
+                      placeholder="Please select..."
+                      />
+                  </div>
               </div>
             </div>
           </div>
@@ -40,7 +73,7 @@ export default function ActorSelectorPanel(props:SelectorPanelProps){
             visibility= {{pickerVisible, setPickerVisible}}
             therapists= {props.filtersContent?.therapistsList || []} 
             patients= {props.filtersContent?.patientsList || []} 
-            mobileSetActorsSelection={mobileSetActorsSelection}
+            userSelectionState={props.userSelectionState}
           />          
         </Panel>
       </div>

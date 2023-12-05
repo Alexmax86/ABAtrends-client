@@ -32,13 +32,7 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
                 /> 
             </div>
 
-            <div className='panel-container'>
-                <p className='panel-labels'>PATIENT(S)</p>
-                <PatientPicker setFilterSelectionData= {props.setFilterSelectionData}
-                    data={props.filtersContent?.patientsList}
-                />
-
-            </div>
+            
 
             <div className='panel-container'>
                 <p className='panel-labels'>THERAPIST(S)</p>
@@ -46,6 +40,14 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
                     setFilterSelectionData= {props.setFilterSelectionData}
                     data={props.filtersContent?.therapistsList}
                 />
+            </div>
+
+            <div className='panel-container'>
+                <p className='panel-labels'>PATIENT(S)</p>
+                <PatientPicker setFilterSelectionData= {props.setFilterSelectionData}
+                    data={props.filtersContent?.patientsList}
+                />
+
             </div>
             
                 

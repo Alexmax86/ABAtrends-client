@@ -1,6 +1,6 @@
-import { Panel } from "../../../../../../components/Common/Components"
+import { Panel } from "../../../../../../Common/Components/Components"
 import { Select } from 'antd';
-import * as CommonTypes from '../../../../../../helpers/CommonTypes'
+import * as CommonTypes from '../../../../../../Common/Interfaces'
 import { useState, useEffect } from "react"
 import MobileActorPicker from "./MobileActorPicker"
 import './ActorSelectorPanel.css'

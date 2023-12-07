@@ -1,3 +1,12 @@
+export type SelectorItemType = {value: number; label: string} | null
+
+export type DashUserSelection = {
+    patients: SelectorItemType[] | null,
+    therapists: SelectorItemType[] | null,
+    trainingId: SelectorItemType[] | null,
+    startDate: DateString,
+    endDate: DateString
+}
 
 export type CustomError = {
     message: string
@@ -27,21 +36,14 @@ export type FiltersContentType = {
     trainingTypesList: SelectorDataType    
 }
 
-export type DateString = `${number}-${string}-${string}`;
+export type DateString = `${number}-${string}-${string}` | null
 
-export type FilterSelectionDataType = {
-    patientsIds: number[],
-    therapistsIds: number[],
-    trainingId: number | undefined,
-    startDate: DateString,
-    endDate: DateString
-}
 
-export type FiltersPanelPropsType = {
-    filtersContent?: FiltersContentType,
-    setFilterSelectionData: React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>,
-    setChartType: (arg:ChartType)=> void;
-} 
+
+
+
+
+
 
 
 
@@ -82,10 +84,7 @@ export interface ApiSessionData {
 
 export type ApiDataType = ApiSessionData[][]
 
-export interface PanelPickerProps{
-    setFilterSelectionData:React.Dispatch<React.SetStateAction<FilterSelectionDataType | undefined>>,
-    data?: SelectorDataType
-}
+
 
 
 

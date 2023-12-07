@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Picker, Button, Space, Toast } from 'antd-mobile'
-import * as CommonTypes from '../../../../../../helpers/CommonTypes'
+import * as CommonTypes from '../../../../../../Common/Interfaces'
 
 
 import { PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker-view"

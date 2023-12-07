@@ -2,17 +2,22 @@
 import LineChart from './components/linechart.jsx';
 import FiltersPanel from './components/filterspanel/filterspanel';
 import {useState, useEffect } from 'react';
-import {Modal} from 'antd-mobile'
 
-import * as Types from './dashInterfaces'
-import * as Lib from '../../helpers/library'
+import { ErrorModal } from '../../Common/Components/Components';
+
+import * as Types from './DashInterfaces.js'
+import * as Lib from '../../Common/Library'
 import "./dashboard.css"
+import * as Apicaller from './../../Common/Apicaller';
+
+const selectionInit = {patients: null, therapists: null, trainingId: null, startDate: null, endDate: null}
+
 
 export default function Dashboard(){
   //Contains general data on patients and therapist to fill selection menus  
   const [filtersContent, setFiltersContent] = useState<Types.FiltersContentType>()    
   //Contains current user selection of patients and therapist
-  const [filterSelectionData, setFilterSelectionData] = useState<Types.FilterSelectionDataType>()  
+  const [dashUserSelection, setDashUserSelection] = useState<Types.DashUserSelection>(selectionInit)  
   //Contains data fetched from the API
   const [apiData, setApiData] = useState<Types.ApiDataType>([])
   //Contains data from the API manipulated to be plugged in the graph
@@ -20,42 +25,31 @@ export default function Dashboard(){
   
   const [graphConfiguration, setGraphConfiguration] = useState<Types.GraphConfiguration>({type: 'Line', tension: 0.4})
 
-  const errorModal = (err:string) => {
-    Modal.alert({
-      confirmText: 'Ok',
-      content: `An error occurred reaching the server. 
-      Please retry, if the error persists contact your system administrator. ${err}`,
-      closeOnMaskClick: true,
-    })
-  }
+  
   //Fetch list of patients and therapist, set filtersContent state
   useEffect(() => {
       (async () => {        
           try {
             setFiltersContent(await Lib.getFiltersContent())  
           } catch(err){
-            errorModal(err as string)
+            ErrorModal(err as string)
           }
       }
       )()
   }, []);
   
-  //Watches filterSelectionData and fetch data according to it, store in apiData
+  //Watches filterSelectionData and fetches data according to it, store in apiData
   
   useEffect(() => {(async () => {
-    try{
-      filterSelectionData !== undefined && setApiData(await Lib.getApiData(filterSelectionData))  
+    try{     
+      Object.values(dashUserSelection).every(property => property !== null)
+      && setApiData(await Apicaller.getSessionData(dashUserSelection))      
     }
     catch(err){
-      Modal.alert({
-        confirmText: 'Ok',
-        content: `An error occurred reaching the server. 
-        Please retry, if the error persists contact your system administrator. ${err}`,
-        closeOnMaskClick: true,
-      })
+      ErrorModal(err as string)
     }
     }    
-    )()}, [filterSelectionData]);
+    )()}, [dashUserSelection]);
   
   
   //manipulate apiData to feed into graphData state  
@@ -74,7 +68,7 @@ export default function Dashboard(){
       <div className='filters-panel-container'>            
         <FiltersPanel 
           filtersContent= {filtersContent} 
-          setFilterSelectionData= {setFilterSelectionData} 
+          dashUserSelectionState= {{dashUserSelection: dashUserSelection, setUserSelection: setDashUserSelection}} 
           setChartType={setChartType} 
         />
       </div>

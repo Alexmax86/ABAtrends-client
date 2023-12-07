@@ -1,6 +1,6 @@
 import {Button, Modal, Toast} from 'antd-mobile'
-import * as CommonTypes from '../../../../helpers/CommonTypes'
-import {recordData} from "../../../../helpers/Apicaller"
+import * as CommonTypes from '../../../../Common/Interfaces'
+import {recordData} from "../../../../Common/Apicaller"
 
 export const ConfirmationModal = (jsonObject:CommonTypes.Api_SessionData) => {
   Modal.confirm({

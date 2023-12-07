@@ -3,7 +3,7 @@ import { Picker, Button, Space, Toast } from 'antd-mobile'
 import { ConfigProvider, ErrorBlock } from 'antd-mobile'
 import enUS from 'antd-mobile/es/locales/en-US'
 import { PickerColumn, PickerValue, PickerValueExtend } from "antd-mobile/es/components/picker-view"
-import * as CommonTypes from '../../../../../../helpers/CommonTypes'
+import * as CommonTypes from '../../../../../../Common/Interfaces'
 
 interface MobileTrainingPickerProps{
     visibility : {

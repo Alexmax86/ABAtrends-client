@@ -1,6 +1,6 @@
-import { Panel } from "../../../../../../components/Common/Components"
+import { Panel } from "../../../../../../Common/Components/Components"
 
-import * as CommonTypes from '../../../../../../helpers/CommonTypes'
+import * as CommonTypes from '../../../../../../Common/Interfaces'
 import { useState, useEffect } from "react"
 import MobileTrainingPicker from "./MobileTrainingPicker"
 import './TrainingSelectorPanel.css'

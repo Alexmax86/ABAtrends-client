@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import {Button, Modal, Toast} from 'antd-mobile'
 import dayjs from 'dayjs'
-import * as CommonTypes from '../../helpers/CommonTypes'
+import * as CommonTypes from '../../Common/Interfaces'
 import "./session.css"
 import ConfigView from "./components/ConfigView/ConfigView"
 import Recorder from "./components/Recorder/Recorder"
-import {recordData} from "../../helpers/Apicaller"
-import {Panel} from '../../components/Common/Components'
+import {recordData} from "../../Common/Apicaller"
+import {Panel} from '../../Common/Components/Components'
 import { ConfirmationModal } from "./components/ConfirmationModal/Confirmationmodal"
 
 const emptyStateObj = {

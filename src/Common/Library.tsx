@@ -1,5 +1,6 @@
-import * as Types from '../pages/dashboard/dashInterfaces'
-import * as CommonTypes from './CommonTypes'
+import * as DashInterfaces from '../pages/dashboard/DashInterfaces'
+import * as CommonTypes from './Interfaces'
+
 
 //Calls API and forms the FiltersContent object that contains list of patients and therapists
 export async function getFiltersContent(): Promise<CommonTypes.FiltersContentType> {
@@ -7,7 +8,7 @@ export async function getFiltersContent(): Promise<CommonTypes.FiltersContentTyp
     const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
         const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
         const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
-        const filtersContent: Types.FiltersContentType = {
+        const filtersContent: DashInterfaces.FiltersContentType = {
             patientsList: actorDataToDisplayStrings(patientsListApi),
             therapistsList: actorDataToDisplayStrings(therapistsListApi),
             trainingTypesList: trainingDataToDisplayStrings(trainingListApi)
@@ -22,10 +23,10 @@ export async function getFiltersContent(): Promise<CommonTypes.FiltersContentTyp
 
 
 //Helper to extract display strings from API Actors data
-export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):Types.SelectorDataType{
+export function actorDataToDisplayStrings(userData: DashInterfaces.Actor[] | undefined):DashInterfaces.SelectorDataType{
   if (userData === undefined) {return []}
   else {
-    return (userData?.map((actor: Types.Actor) => {
+    return (userData?.map((actor: DashInterfaces.Actor) => {
       const { id, name, surname } = actor;
       const label = `${name} ${surname}`;
       const value:number = id      
@@ -34,10 +35,10 @@ export function actorDataToDisplayStrings(userData: Types.Actor[] | undefined):T
   }
 }
 
-export function trainingDataToDisplayStrings(data: Types.TrainingType[] | undefined):Types.SelectorDataType{
+export function trainingDataToDisplayStrings(data: DashInterfaces.TrainingType[] | undefined):DashInterfaces.SelectorDataType{
   if (data === undefined) {return []}
   else {
-    return (data?.map((training: Types.TrainingType) => {
+    return (data?.map((training: DashInterfaces.TrainingType) => {
       const { id, name, description } = training;
       const label = `${name}`;
       const value:number = id      
@@ -46,23 +47,12 @@ export function trainingDataToDisplayStrings(data: Types.TrainingType[] | undefi
   }
 }
 
-export async function getApiData(filterSelectionData: Types.FilterSelectionDataType):Promise<Types.ApiDataType>{
-  try{
-    const resp = await fetch(process.env.REACT_APP_API_URL + `/getsessions?patientsids=${filterSelectionData.patientsIds}&therapistsids=${filterSelectionData.therapistsIds}&trainingtype=${filterSelectionData.trainingId}&startdate=${filterSelectionData.startDate}&enddate=${filterSelectionData.endDate}`);
-    const json = await resp.json(); 
-    return json || []
-  }
-  catch(err){
-    throw(err as string)
-  }
-  
-}
 
-export function apiToGraph(apiData:Types.ApiDataType):Types.GraphPropsType{
+export function apiToGraph(apiData:DashInterfaces.ApiDataType):DashInterfaces.GraphPropsType{
   const tempGraphProps:any = {datasets:[]} 
   apiData.forEach(patientData => 
     {      
-      let graphDataSet:Types.GraphDataSet = {
+      let graphDataSet:DashInterfaces.GraphDataSet = {
         label: patientData[0].Patient_name,
         data: [],
         backgroundColor: 'black',
@@ -70,7 +60,7 @@ export function apiToGraph(apiData:Types.ApiDataType):Types.GraphPropsType{
         tension: 0.4        
       }
       patientData.forEach(session =>{
-        let dataPoint:Types.GraphDataPoint = {
+        let dataPoint:DashInterfaces.GraphDataPoint = {
           x: session.date,
           y: session.responses,
           therapist: session.Therapist_name
@@ -89,6 +79,8 @@ export function parseStringArrToInt(arg:string | string[]){
   else {parsedValue = arg.map((str) => parseInt(str))}
   return parsedValue
 }
+
+
 
 
 

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 import {Button, Picker} from 'antd-mobile'
 import MobileTrainingPicker from "./Components/TrainingSelectorPanel/MobileTrainingPicker"
-import * as Lib from '../../../../helpers/library'
-import * as CommonTypes from '../../../../helpers/CommonTypes'
-import {Panel} from '../../../../components/Common/Components'
+import * as Lib from '../../../../Common/Library'
+import * as CommonTypes from '../../../../Common/Interfaces'
 import ActorSelectorPanel from "./Components/ActorSelectorPanel/ActorSelectorPanel"
 import TrainingSelectorPanel from "./Components/TrainingSelectorPanel/TrainingSelectorPanel"
 import './ConfigView.css'
+
 
 //*****************************************************************************/
 //This component handle the selection of the choices before starting a session

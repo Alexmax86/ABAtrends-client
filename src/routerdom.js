@@ -29,7 +29,7 @@ export default function Routerdom() {
       children:[
         {
           path:"/",
-          element:<Home />
+          element:<Dashboard />
         },
         {
           path:"/operators",

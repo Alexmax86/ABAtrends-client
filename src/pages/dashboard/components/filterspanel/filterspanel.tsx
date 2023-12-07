@@ -32,8 +32,6 @@ export default function FiltersPanel(props:Types.FiltersPanelPropsType){
                 /> 
             </div>
 
-            
-
             <div className='panel-container'>
                 <p className='panel-labels'>THERAPIST(S)</p>
                 <TherapistPicker 
@@ -119,6 +117,10 @@ function PatientPicker({setFilterSelectionData, data}: Types.PanelPickerProps){
     )
 }
 
+interface TherapistPickerInterface{
+
+}
+
 function TherapistPicker({setFilterSelectionData, data}: Types.PanelPickerProps){
 
     const onChange = (value: string | string[]) => setFilterSelectionData((prevState:any) => (
@@ -134,7 +136,8 @@ function TherapistPicker({setFilterSelectionData, data}: Types.PanelPickerProps)
             style={{ width: '100%' }}
             options={data}
             placeholder="Please select..."
-            onChange={onChange}    
+            onChange={onChange}
+              
         />
     )
 }

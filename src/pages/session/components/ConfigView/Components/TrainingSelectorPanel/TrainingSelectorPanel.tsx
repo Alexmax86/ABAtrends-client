@@ -53,11 +53,6 @@ export default function TrainingSelectorPanel(props: SelectorPanelProps){
                     />
                 </div>                
               </div>
-
-                              
-                
-                
-              
               </div>
           </div>                
         </Panel>

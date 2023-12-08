@@ -18,39 +18,39 @@ interface ConfigViewProps{
 }
 
 export default function ConfigView({userSelectionState, setSelectionComplete}: ConfigViewProps){
-    //Contain information of dropdowns
-    const [filtersContent, setFiltersContent] = useState<CommonTypes.FiltersContentType>()    
-        
-    //Visibility of mobile widgets
-    const [startIsDisabled, setStartIsDisabled] = useState<boolean>(true)
-    
-    useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
-
-      const selectionComplete = 
-        userSelectionState.userSelection?.Patient!==undefined 
-        && userSelectionState.userSelection?.Therapist!==undefined
-        && userSelectionState.userSelection?.Training!==undefined 
-
-      const handleStart = () => setSelectionComplete(true)
+  //Contain information of dropdowns
+  const [filtersContent, setFiltersContent] = useState<CommonTypes.FiltersContentType>()    
       
-    return(
-      <>
-        <ActorSelectorPanel filtersContent={filtersContent} userSelectionState={userSelectionState}/>
-        <TrainingSelectorPanel filtersContent={filtersContent} userSelectionState={userSelectionState}/>
-        
-        <div className="record-buttons">          
-          <Button disabled={!selectionComplete} 
-            block color='success' 
-            style={{'--text-color': 'black'}} 
-            size='large' 
-            shape='rounded'
-            onClick={handleStart}>
-              START
-            </Button>
-        </div>
-        
-      </>
-    )
+  //Visibility of mobile widgets
+  const [startIsDisabled, setStartIsDisabled] = useState<boolean>(true)
+  
+  useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
+
+  const selectionComplete = 
+    userSelectionState.userSelection?.Patient!==null 
+    && userSelectionState.userSelection?.Therapist!==null
+    && userSelectionState.userSelection?.Training!==null 
+
+  const handleStart = () => setSelectionComplete(true)
+    
+  return(
+    <>
+      <ActorSelectorPanel filtersContent={filtersContent} userSelectionState={userSelectionState}/>
+      <TrainingSelectorPanel filtersContent={filtersContent} userSelectionState={userSelectionState}/>
+      
+      <div className="record-buttons">          
+        <Button disabled={!selectionComplete} 
+          block color='success' 
+          style={{'--text-color': 'black'}} 
+          size='large' 
+          shape='rounded'
+          onClick={handleStart}>
+            START
+          </Button>
+      </div>
+      
+    </>
+  )
 
 }
 

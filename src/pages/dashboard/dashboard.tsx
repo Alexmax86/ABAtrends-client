@@ -2,7 +2,8 @@
 import LineChart from './components/linechart.jsx';
 import FiltersPanel from './components/filterspanel/filterspanel';
 import {useState, useEffect } from 'react';
-
+import { Button } from 'antd';
+import { BarChartOutlined, LineChartOutlined } from '@ant-design/icons';
 import { ErrorModal } from '../../Common/Components/Components';
 
 import * as Types from './DashInterfaces.js'
@@ -30,13 +31,22 @@ export default function Dashboard(){
   useEffect(() => {
       (async () => {        
           try {
-            setFiltersContent(await Lib.getFiltersContent())  
+            const fetchedFiltersContent = await Lib.getFiltersContent();
+            setFiltersContent(fetchedFiltersContent);
+            setDashUserSelection((prevState:any) => (        
+              {
+                ...prevState, 
+                therapists: fetchedFiltersContent?.therapistsList
+              })); 
           } catch(err){
             ErrorModal(err as string)
           }
+           
       }
       )()
   }, []);
+
+  
   
   //Watches filterSelectionData and fetches data according to it, store in apiData
   
@@ -74,6 +84,16 @@ export default function Dashboard(){
       </div>
       <div className='graph-container'>
         <LineChart graphData={graphData} graphConfiguration={graphConfiguration} ></LineChart>
+        
+        <div className='settings-container'>
+           {
+            graphConfiguration.type === 'Line'
+            ? <Button size="large" shape="circle" icon={ <BarChartOutlined /> } onClick={() => setGraphConfiguration({type: 'Column', tension: 0.4})} />
+            : <Button size="large" shape="circle" icon={ <LineChartOutlined /> } onClick={() => setGraphConfiguration({type: 'Line', tension: 0.4})} />
+           }
+           
+           
+        </div>
       </div>
     </div>
   )

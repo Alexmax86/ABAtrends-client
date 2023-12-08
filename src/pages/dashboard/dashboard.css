@@ -1,17 +1,22 @@
 .dashboard-container{
     height: calc(100vh - 4rem);
+    max-height: calc(100vh - 4rem);
+    overflow-y: hidden;
     
 }
 
 .filters-panel-container{
-   
-    
+    padding-bottom: 10px;
+    padding-right: 25px;
 }
 
 .graph-container{    
-    height:90%;
-    width: 90%;    
+    position: relative;
+    height:85%; /*Canvas requires at least one relative measure like vh for responsiveness*/
+    width: 90%;
+           
     margin: auto;
+    margin-top: 20px;
 }
 
 @media only screen and (max-width: 600px){
@@ -25,3 +30,9 @@
         margin: auto;
     }
 }
+
+.settings-container {
+    position: absolute; 
+    top: 0px; 
+    right: 0px; 
+  }

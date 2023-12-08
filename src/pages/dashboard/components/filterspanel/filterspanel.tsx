@@ -1,7 +1,8 @@
 import './filterspanel.css'
 import { useState } from 'react';
 import { DatePicker, Select } from 'antd';
-import type { RadioChangeEvent, SelectProps } from 'antd';
+
+import type { RadioChangeEvent, SelectProps  } from 'antd';
 import * as Types from '../../DashInterfaces'
 import * as Lib from '../../../../Common/Library'
 
@@ -56,8 +57,6 @@ export default function FiltersPanel(props:FiltersPanelPropsType){
                 />
 
             </div>
-            
-                
         </div>
     )
 }
@@ -132,7 +131,8 @@ function PatientPicker({dashUserSelectionState, data}: PanelPickerProps){
             style={{ width: '100%' }}
             options={data} 
             placeholder="Please select..." 
-            onChange={onChange}            
+            onChange={onChange}
+                        
         />
     )
 }
@@ -149,14 +149,16 @@ function TherapistPicker({dashUserSelectionState, data}: PanelPickerProps){
        }));       
     }
 
+    const values: SelectProps["value"] = dashUserSelectionState.dashUserSelection.therapists
+    const defaultValue: SelectProps["defaultValue"] = data;
     return(
         <Select 
             mode="multiple"                
             style={{ width: '100%' }}
             options={data}
             placeholder="Please select..."
-            onChange={onChange}
-            
+            onChange={onChange}            
+            value= {values ? values : []}                        
         />
     )
 }

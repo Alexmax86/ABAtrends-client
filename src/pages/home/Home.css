@@ -1,0 +1,38 @@
+.home-view{
+    
+    margin:auto;
+}
+@media only screen and (min-width: 600px) {
+    .home-view{
+        width: 50%;
+    }
+}
+
+.tab-wrapper{
+    max-width: 100%;
+}
+
+.table-wrapper{
+    max-height: 70vh;
+    overflow-y: scroll;
+}
+
+.table-wrapper::-webkit-scrollbar{
+    width: 0.5rem;        
+  }
+  .table-wrapper::-webkit-scrollbar-track{
+    background-color: var(--bg-primary);      
+  }
+  
+  .table-wrapper::-webkit-scrollbar-thumb{
+    background-color: #ececec;      
+  }
+
+.andtm-tab {
+    --active-line-color: var(--svg-icons-color);
+    --active-title-color: var(--svg-icons-color);
+    --title-font-size: large;
+}
+
+
+

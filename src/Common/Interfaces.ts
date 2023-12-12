@@ -1,3 +1,25 @@
+//////////////Interfaces corresponding to unprocessed data as coming from SQL tables
+export type RawActorData = {
+    id: number,
+    name: string,
+    surname: string,
+    email: string,
+    age: number
+}
+
+export type RawTrainingData = {
+    id: number,
+    name: string,
+    description: string
+}
+
+export type RawEntities = {
+    Therapists: RawActorData[],
+    Patients: RawActorData[],
+    Trainings: RawTrainingData[]
+} | undefined
+/************************************************************************************* */
+
 export type UserSelectionState ={    
         userSelection: SelectionStateType /*| undefined*/
         setUserSelection: React.Dispatch<React.SetStateAction<SelectionStateType>>      

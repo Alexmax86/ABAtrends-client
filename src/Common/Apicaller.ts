@@ -39,3 +39,20 @@ export async function getSessionData(userSelection: DashInterfaces.DashUserSelec
     }
     
   }
+
+  export async function getRawEntities(): Promise<CommonTypes.RawEntities> {
+    try{
+      const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
+          const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
+          const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
+          const entities: CommonTypes.RawEntities = {
+              Therapists: patientsListApi,
+              Patients: therapistsListApi,
+              Trainings: trainingListApi
+          }
+          
+          return entities 
+    }
+    catch(err){ throw err}
+          
+  }

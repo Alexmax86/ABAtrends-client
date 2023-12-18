@@ -1,6 +1,9 @@
-.home-view{
-    
+.home-view{    
     margin:auto;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: space-around;
 }
 @media only screen and (min-width: 600px) {
     .home-view{
@@ -13,8 +16,10 @@
 }
 
 .table-wrapper{
-    max-height: 70vh;
+    border-radius: 25px;
+    /*max-height: 80vh;*/
     overflow-y: scroll;
+    
 }
 
 .table-wrapper::-webkit-scrollbar{
@@ -32,6 +37,15 @@
     --active-line-color: var(--svg-icons-color);
     --active-title-color: var(--svg-icons-color);
     --title-font-size: large;
+}
+
+.expl-wrapper{
+    
+    font-size: large;
+}
+
+.home-icons{
+    fill: var(--svg-icons-color)
 }
 
 

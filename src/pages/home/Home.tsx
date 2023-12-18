@@ -8,6 +8,7 @@ import './Home.css'
 import {getRawEntities} from './../../Common/Apicaller'
 import * as CommonTypes from '../../Common/Interfaces'
 import { ErrorModal } from '../../Common/Components/Components';
+import { IconDashboard, IconSession, IconHome } from '../../Common/Components/Components';
 
 function Home(){
   const [tablesContent, setTableContent] = useState<CommonTypes.RawEntities>()
@@ -26,6 +27,17 @@ useEffect(() =>{
 
     return(  
       <div className='home-view'>
+        
+        <div className='expl-wrapper'> 
+          <Panel>
+            <ul>
+              <li>Explore below the details of therapists, actors, and trainings, providing an overview of the key entities within the app's ecosystem.</li>
+              <li>Use the <IconSession height={1} className="home-icons"/> Session section to start a live recording of new data</li>
+              <li>Use the <IconDashboard height={1} className="home-icons"/> Dashboard section to visualize line and columns charts, representing data over time</li>
+            </ul>            
+          </Panel>
+        </div>
+        
         <Panel>
           <div className='table-wrapper'>
             <Tabs className= "andtm-tab">

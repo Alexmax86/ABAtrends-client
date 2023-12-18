@@ -25,7 +25,13 @@
     .session-viewport-config > * {
         margin: 15px
       }
-    }
+    .session-viewport-record{    
+    width: 50%;
+    margin: auto;
+    align-items: center;              
+    }   
+}
+
 
 .session-panel-outer{
     width: 100%;

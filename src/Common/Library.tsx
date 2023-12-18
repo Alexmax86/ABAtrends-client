@@ -49,9 +49,13 @@ export function trainingDataToDisplayStrings(data: DashInterfaces.TrainingType[]
 
 
 export function apiToGraph(apiData:DashInterfaces.ApiDataType):DashInterfaces.GraphPropsType{
-  const tempGraphProps:any = {datasets:[]} 
+  //Initialize empty graph data object to be populated and then returned 
+  const graphData:DashInterfaces.GraphPropsType = {datasets:[]} 
+
+  //For each patient in the data received from the API...
   apiData.forEach(patientData => 
-    {      
+    {
+      //...Initialize a graph data set object (representing a line in the chart)      
       let graphDataSet:DashInterfaces.GraphDataSet = {
         label: patientData[0].Patient_name,
         data: [],
@@ -59,6 +63,7 @@ export function apiToGraph(apiData:DashInterfaces.ApiDataType):DashInterfaces.Gr
         borderColor: 'black',
         tension: 0.4        
       }
+      //...Fill single sessions information (representing points of the line) in the 'data' key of the dataset object
       patientData.forEach(session =>{
         let dataPoint:DashInterfaces.GraphDataPoint = {
           x: session.date,
@@ -67,10 +72,9 @@ export function apiToGraph(apiData:DashInterfaces.ApiDataType):DashInterfaces.Gr
         }
         graphDataSet.data.push(dataPoint)
       })
-      tempGraphProps.datasets.push(graphDataSet)
-      
+      graphData.datasets.push(graphDataSet)      
     })
-    return tempGraphProps
+    return graphData
 }
 
 export function parseStringArrToInt(arg:string | string[]){

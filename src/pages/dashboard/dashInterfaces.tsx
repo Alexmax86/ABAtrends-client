@@ -82,6 +82,8 @@ export interface ApiSessionData {
     responses: number      
 }
 
+//The data received from the Session API is an array containing arrays of data for each patient. 
+//Each array contains 
 export type ApiDataType = ApiSessionData[][]
 
 

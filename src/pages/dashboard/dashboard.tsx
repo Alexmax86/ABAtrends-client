@@ -65,6 +65,8 @@ export default function Dashboard(){
   //manipulate apiData to feed into graphData state  
   useEffect(()=>{ setGraphData(Lib.apiToGraph(apiData)) }, [apiData])
   
+  
+  
   const setChartType = (arg:Types.ChartType) => {
     const newConfiguration: Types.GraphConfiguration = { ...graphConfiguration };
     newConfiguration.type = arg    

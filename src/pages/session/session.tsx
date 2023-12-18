@@ -53,7 +53,7 @@ export default function Session(){
                                         <span className="info-value">{userSelection.Patient?.label}</span>
                                     </div>
                                     
-                                    <span className="info-item-training">Objects visual recognition</span>
+                                    <span className="info-item-training">{userSelection.Training?.label}</span>
                                     
                                 </div>}
                     </div>      

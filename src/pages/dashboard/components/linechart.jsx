@@ -34,6 +34,7 @@ import {
     
     
     const options = {
+      //Set up time scale on x axis
       scales:{
         x: {
           type: 'time',
@@ -42,10 +43,13 @@ import {
         },
         y: {beginAtZero: true}
       },
+      
       plugins: {
+        //Set up color plugin
         colors: {
           forceOverride: true
         },
+        //Configure tooltip
         tooltip:{
           callbacks:{
             title: (context) => context[0].dataset.data[context.dataIndex],
@@ -57,8 +61,7 @@ import {
             }
           }
         } 
-      },
-         
+      },         
     }
     return (
       

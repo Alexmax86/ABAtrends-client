@@ -20,10 +20,8 @@ export default function Dashboard(){
   //Contains current user selection of patients and therapist
   const [dashUserSelection, setDashUserSelection] = useState<Types.DashUserSelection>(selectionInit)  
   //Contains data fetched from the API
-  const [apiData, setApiData] = useState<Types.ApiDataType>([])
-  //Contains data from the API manipulated to be plugged in the graph
-  const [graphData, setGraphData] = useState<Types.GraphPropsType>({datasets:[]});
-  
+  const [apiData, setApiData] = useState<Types.ApiDataType>([])  
+  //Holds graph rendering configuration
   const [graphConfiguration, setGraphConfiguration] = useState<Types.GraphConfiguration>({type: 'Line', tension: 0.4})
 
   
@@ -44,12 +42,9 @@ export default function Dashboard(){
            
       }
       )()
-  }, []);
-
+  }, []);  
   
-  
-  //Watches filterSelectionData and fetches data according to it, store in apiData
-  
+  //Watches filterSelectionData and fetches data according to it, store in apiData  
   useEffect(() => {(async () => {
     try{     
       Object.values(dashUserSelection).every(property => property !== null)
@@ -61,18 +56,15 @@ export default function Dashboard(){
     }    
     )()}, [dashUserSelection]);
   
-  
-  //manipulate apiData to feed into graphData state  
-  useEffect(()=>{ setGraphData(Lib.apiToGraph(apiData)) }, [apiData])
-  
-  
-  
+  //callback to set Line or Column chart (other settings for future iterations)
   const setChartType = (arg:Types.ChartType) => {
     const newConfiguration: Types.GraphConfiguration = { ...graphConfiguration };
     newConfiguration.type = arg    
     setGraphConfiguration(newConfiguration)
   }
 
+  //Prepare chart data for rendering
+  const graphData = Lib.apiToGraph(apiData)
 
   
   return (    

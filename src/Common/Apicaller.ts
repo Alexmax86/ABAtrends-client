@@ -1,5 +1,5 @@
 import * as CommonTypes from './Interfaces'
-import * as DashInterfaces from './../pages/dashboard/DashInterfaces'
+import * as DashInterfaces from '../pages/dashboard/DashInterfaces'
 
 
 

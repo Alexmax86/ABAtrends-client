@@ -20,7 +20,6 @@
     margin-bottom: 0px;
     margin-top: 0px;
     font-size: 14px;
-
 }
 
 
@@ -46,4 +45,14 @@
     }
     
 }
+
+@media only screen and (max-width: 950px){
+    .ant-picker-panels{
+        display: none !important;
+    }
+    .ant-picker-presets > ul{
+        height: auto !important;
+    }
+}
+
 

@@ -2,7 +2,12 @@ import {Button, Modal, Toast} from 'antd-mobile'
 import * as CommonTypes from '../../../../Common/Interfaces'
 import {recordData} from "../../../../Common/Apicaller"
 
-export const ConfirmationModal = (jsonObject:CommonTypes.Api_SessionData) => {
+export const ConfirmationModal = (jsonObject:CommonTypes.Api_SessionData, resetStates:Function) => {
+  const emptyStateObj = {
+    Therapist:  null,
+    Patient:  null,
+    Training:  null
+}
   Modal.confirm({
       content: 'Are you sure you want to finish the session and send the data?',
       confirmText:"Yes",
@@ -15,6 +20,7 @@ export const ConfirmationModal = (jsonObject:CommonTypes.Api_SessionData) => {
               content: 'Data sent successfully',
               position: 'bottom',
             })
+          resetStates()
         }
         catch(err){
           Modal.alert({

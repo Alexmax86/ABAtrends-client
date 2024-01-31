@@ -89,8 +89,7 @@ function PanelDatePicker({dashUserSelectionState}: PanelPickerProps){
                 {label:"Last 6 months", value:[dayjs().subtract(6, 'month'), dayjs() ]},
                 {label:"Last year", value:[dayjs().subtract(12, 'month'), dayjs() ]}            
             ]}
-            style={{ width: '100%' }}
-            
+            style={{ width: '100%' }}            
         /> 
     )
 }
@@ -131,8 +130,7 @@ function PatientPicker({dashUserSelectionState, data}: PanelPickerProps){
             style={{ width: '100%' }}
             options={data} 
             placeholder="Please select..." 
-            onChange={onChange}
-                        
+            onChange={onChange}                        
         />
     )
 }

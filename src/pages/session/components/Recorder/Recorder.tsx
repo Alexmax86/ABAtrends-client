@@ -1,5 +1,7 @@
 import {Button, Modal, Toast} from 'antd-mobile'
 import './recorder.css'
+
+
 //import FinishButton from './Components/FinishButton'
 
 
@@ -13,10 +15,8 @@ interface RecorderProps{
 }
 
 export default function Recorder({countState, confirmModal}: RecorderProps){
-
-    const increaseCount = () => countState.setCount(countState.count + 1)
     
-    
+    const increaseCount = () => countState.setCount(countState.count + 1) 
 
     return (
         <>

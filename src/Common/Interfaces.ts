@@ -21,7 +21,7 @@ export type RawEntities = {
 /************************************************************************************* */
 
 export type UserSelectionState ={    
-        userSelection: SelectionStateType /*| undefined*/
+        userSelection: SelectionStateType 
         setUserSelection: React.Dispatch<React.SetStateAction<SelectionStateType>>      
 }
 

@@ -1,23 +1,21 @@
 import * as DashInterfaces from '../pages/dashboard/DashInterfaces'
 import * as CommonTypes from './Interfaces'
+import { getRawEntities } from './Apicaller'
 
 
-//Calls API and forms the FiltersContent object that contains list of patients and therapists
+//Forms the FiltersContent object that contains list of patients and therapists
 export async function getFiltersContent(): Promise<CommonTypes.FiltersContentType> {
-  try{
-    const patientsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/getpatients')).json()
-        const therapistsListApi = await (await fetch(process.env.REACT_APP_API_URL + '/gettherapists')).json()
-        const trainingListApi= await (await fetch(process.env.REACT_APP_API_URL + '/gettrainingtypes')).json()
+  try{   
+     const entities:CommonTypes.RawEntities = await getRawEntities();
         const filtersContent: DashInterfaces.FiltersContentType = {
-            patientsList: actorDataToDisplayStrings(patientsListApi),
-            therapistsList: actorDataToDisplayStrings(therapistsListApi),
-            trainingTypesList: trainingDataToDisplayStrings(trainingListApi)
+            patientsList: actorDataToDisplayStrings(entities?.Patients),
+            therapistsList: actorDataToDisplayStrings(entities?.Therapists),
+            trainingTypesList: trainingDataToDisplayStrings(entities?.Trainings)
         }
         
         return filtersContent 
   }
-  catch(err){ throw err}
-        
+  catch(err){ throw err}        
 }
 
 

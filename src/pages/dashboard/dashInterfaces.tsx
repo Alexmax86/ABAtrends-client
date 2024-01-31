@@ -38,15 +38,6 @@ export type FiltersContentType = {
 
 export type DateString = `${number}-${string}-${string}` | null
 
-
-
-
-
-
-
-
-
-
 export type GraphDataPoint = {
     x: DateString, 
     y: number,

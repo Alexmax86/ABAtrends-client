@@ -33,7 +33,13 @@ export default function Session(){
         responses: count
     }
 
-    const confirmModal = () => ConfirmationModal(jsonObject) 
+    const resetStates = () => {
+        setUserSelection(emptyStateObj)
+        setSelectionComplete(false)
+        setCount(0)
+    }
+
+    const confirmModal = () => ConfirmationModal(jsonObject, resetStates) 
 
     return(
         <div className={selectionComplete ? 'session-viewport-record' : 'session-viewport-config'} >

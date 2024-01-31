@@ -38,8 +38,7 @@ export default function Dashboard(){
               })); 
           } catch(err){
             ErrorModal(err as string)
-          }
-           
+          }           
       }
       )()
   }, []);  

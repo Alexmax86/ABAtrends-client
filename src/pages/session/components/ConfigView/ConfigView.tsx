@@ -5,6 +5,7 @@ import * as Lib from '../../../../Common/Library'
 import * as CommonTypes from '../../../../Common/Interfaces'
 import ActorSelectorPanel from "./Components/ActorSelectorPanel/ActorSelectorPanel"
 import TrainingSelectorPanel from "./Components/TrainingSelectorPanel/TrainingSelectorPanel"
+import { ErrorModal } from "../../../../Common/Components/Components"
 import './ConfigView.css'
 
 
@@ -24,7 +25,16 @@ export default function ConfigView({userSelectionState, setSelectionComplete}: C
   //Visibility of mobile widgets
   const [startIsDisabled, setStartIsDisabled] = useState<boolean>(true)
   
-  useEffect(() => {(async () => setFiltersContent(await Lib.getFiltersContent()))()}, []);
+  useEffect(
+    () => {(async () => {
+      try{
+        setFiltersContent(await Lib.getFiltersContent())
+      }
+      catch(err){
+        ErrorModal(err as string)
+      }
+    }    
+    )()}, []);
 
   const selectionComplete = 
     userSelectionState.userSelection?.Patient!==null 

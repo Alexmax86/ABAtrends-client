@@ -28,6 +28,7 @@
 
 .navbar {  
   position: fixed;
+  z-index: 9999;
   background-color: var(--bckg-primary);
   transition: width 200ms ease;
   color: var(--text-primary);

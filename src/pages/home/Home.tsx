@@ -30,7 +30,7 @@ useEffect(() =>{
         
         <div className='expl-wrapper'> 
           <Panel>
-            <ul>
+            <ul>              
               <li>Explore below the details of therapists, actors, and trainings, providing an overview of the key entities within the app's ecosystem.</li>
               <li>Use the <IconSession height={1} className="home-icons"/> Session section to start a live recording of new data</li>
               <li>Use the <IconDashboard height={1} className="home-icons"/> Dashboard section to visualize line and columns charts, representing data over time</li>

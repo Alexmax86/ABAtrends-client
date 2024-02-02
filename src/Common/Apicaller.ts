@@ -29,6 +29,7 @@ export async function recordData(jsonObject: CommonTypes.Api_SessionData){
         return true
     }
     catch (err){
+      console.log(err)
         throw new Error(err as string);
     }
     
@@ -44,6 +45,7 @@ export async function getSessionData(userSelection: DashInterfaces.DashUserSelec
       return json || []
     }
     catch(err){
+      console.log(err)
       throw(err as string)
     }
     
@@ -55,14 +57,17 @@ export async function getRawEntities(): Promise<CommonTypes.RawEntities> {
         const therapistsListApi = await (await fetch(baseURL + '/gettherapists')).json()
         const trainingListApi= await (await fetch(baseURL + '/gettrainingtypes')).json()
         const entities: CommonTypes.RawEntities = {
-            Therapists: patientsListApi,
-            Patients: therapistsListApi,
+            Therapists: therapistsListApi,
+            Patients: patientsListApi,
             Trainings: trainingListApi
         }
         
         return entities 
   }
-  catch(err){ throw err}          
+  catch(err){
+    console.log(err)
+    throw err as string
+  }          
 }
 
 

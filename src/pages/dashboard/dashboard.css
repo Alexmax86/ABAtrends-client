@@ -1,35 +1,25 @@
 .dashboard-container{
-    height: calc(100vh - 4rem);
-    max-height: calc(100vh - 4rem);
-    overflow-y: hidden;
-    
+    display: flex;
+    flex-direction: column;     
+    justify-content: center;
+    align-items: center;    
 }
 
-.filters-panel-container{
+.filters-panel-container{    
     padding-bottom: 10px;
     padding-right: 25px;
+    width: 100%;
 }
 
-.graph-container{    
-    position: relative;
-    height:85%; /*Canvas requires at least one relative measure like vh for responsiveness*/
-    width: 90%;
-           
-    margin: auto;
+.graph-container{ 
+    display: flex; 
+    justify-content: center;
+    align-items: center;  
+    position: relative;    
+    width: 90%;  /*Canvas requires at least one relative measure like vh for responsiveness*/
     margin-top: 20px;
 }
 
-@media only screen and (max-width: 600px){
-    .filters-panel-container{
-        height:auto;        
-    }
-
-    .graph-container{    
-        height:90%;
-        width: 90%;    
-        margin: auto;
-    }
-}
 
 .settings-container {
     position: absolute; 
